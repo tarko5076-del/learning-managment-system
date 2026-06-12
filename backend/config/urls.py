@@ -17,13 +17,18 @@ def api_root(_request):
             "admin": "/admin/",
             "auth": {
                 "register": "/api/auth/register",
-                "login": "/api/auth/login",
-                "profile": "/api/auth/profile",
-            },
-            "courses": "/api/courses",
-            "lessons": "/api/lessons",
-            "enrollments": "/api/enrollments",
-            "my_courses": "/api/my-courses",
+            "login": "/api/auth/login",
+            "profile": "/api/auth/profile",
+            "change_password": "/api/auth/change-password",
+            "reset_password": "/api/auth/reset-password",
+        },
+        "categories": "/api/categories",
+        "courses": "/api/courses",
+        "instructors": "/api/instructors",
+        "lessons": "/api/lessons",
+        "lesson_progress": "/api/lesson-progress",
+        "enrollments": "/api/enrollments",
+        "my_courses": "/api/my-courses",
         }
     )
 

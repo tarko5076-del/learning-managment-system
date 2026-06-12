@@ -3,7 +3,13 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .serializers import LoginSerializer, RegisterSerializer, UserSerializer
+from .serializers import (
+    ChangePasswordSerializer,
+    LoginSerializer,
+    PasswordResetSerializer,
+    RegisterSerializer,
+    UserSerializer,
+)
 
 
 def token_payload_for(user):
@@ -48,3 +54,23 @@ class ProfileView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+class ChangePasswordView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request):
+        serializer = ChangePasswordSerializer(data=request.data, context={"request": request})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"detail": "Password changed successfully."}, status=status.HTTP_200_OK)
+
+
+class PasswordResetView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request):
+        serializer = PasswordResetSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"detail": "Password reset successfully."}, status=status.HTTP_200_OK)

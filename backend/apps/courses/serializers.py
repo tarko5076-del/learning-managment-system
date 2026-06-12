@@ -4,7 +4,7 @@ from rest_framework import serializers
 from apps.users.models import User
 from apps.users.serializers import UserSummarySerializer
 
-from .models import Category, Course, Enrollment, Lesson
+from .models import Category, Course, Enrollment, Lesson, LessonProgress
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -12,13 +12,50 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ("id", "name")
 
+    def validate_name(self, value):
+        name = value.strip()
+        if not name:
+            raise serializers.ValidationError("Category name is required.")
+        return name
+
 
 class LessonSerializer(serializers.ModelSerializer):
     course_title = serializers.CharField(source="course.title", read_only=True)
+    is_completed = serializers.SerializerMethodField()
+    completed_at = serializers.SerializerMethodField()
 
     class Meta:
         model = Lesson
-        fields = ("id", "course", "course_title", "title", "content", "video_url", "order")
+        fields = (
+            "id",
+            "course",
+            "course_title",
+            "title",
+            "content",
+            "video_url",
+            "order",
+            "is_completed",
+            "completed_at",
+        )
+
+    def get_is_completed(self, obj):
+        request = self.context.get("request")
+        user = getattr(request, "user", None)
+
+        if not user or not user.is_authenticated or user.role != User.Role.STUDENT:
+            return False
+
+        return obj.progress.filter(student=user, completed=True).exists()
+
+    def get_completed_at(self, obj):
+        request = self.context.get("request")
+        user = getattr(request, "user", None)
+
+        if not user or not user.is_authenticated or user.role != User.Role.STUDENT:
+            return None
+
+        progress = obj.progress.filter(student=user, completed=True).first()
+        return progress.completed_at if progress else None
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -35,6 +72,7 @@ class CourseSerializer(serializers.ModelSerializer):
     lessons_count = serializers.SerializerMethodField()
     enrollments_count = serializers.SerializerMethodField()
     is_enrolled = serializers.SerializerMethodField()
+    progress_percentage = serializers.SerializerMethodField()
 
     class Meta:
         model = Course
@@ -53,6 +91,7 @@ class CourseSerializer(serializers.ModelSerializer):
             "lessons_count",
             "enrollments_count",
             "is_enrolled",
+            "progress_percentage",
         )
         read_only_fields = ("id", "instructor", "created_at", "updated_at")
 
@@ -79,6 +118,24 @@ class CourseSerializer(serializers.ModelSerializer):
             return False
 
         return obj.enrollments.filter(student=user).exists()
+
+    def get_progress_percentage(self, obj):
+        request = self.context.get("request")
+        user = getattr(request, "user", None)
+
+        if not user or not user.is_authenticated or user.role != User.Role.STUDENT:
+            return 0
+
+        total_lessons = getattr(obj, "lessons_total", obj.lessons.count())
+        if not total_lessons:
+            return 0
+
+        completed_lessons = LessonProgress.objects.filter(
+            student=user,
+            lesson__course=obj,
+            completed=True,
+        ).count()
+        return round((completed_lessons / total_lessons) * 100)
 
     def validate(self, attrs):
         category_name = attrs.get("category_name")
@@ -144,3 +201,32 @@ class EnrollmentSerializer(serializers.ModelSerializer):
             return Enrollment.objects.create(student=request.user, **validated_data)
         except IntegrityError as exc:
             raise serializers.ValidationError("You are already enrolled in this course.") from exc
+
+
+class LessonProgressSerializer(serializers.ModelSerializer):
+    lesson = LessonSerializer(read_only=True)
+    lesson_id = serializers.PrimaryKeyRelatedField(
+        queryset=Lesson.objects.select_related("course", "course__instructor").all(),
+        source="lesson",
+        write_only=True,
+    )
+
+    class Meta:
+        model = LessonProgress
+        fields = ("id", "lesson", "lesson_id", "completed", "completed_at", "updated_at")
+        read_only_fields = ("id", "lesson", "completed_at", "updated_at")
+
+    def validate(self, attrs):
+        request = self.context.get("request")
+        user = getattr(request, "user", None)
+        lesson = attrs.get("lesson")
+
+        if not user or not user.is_authenticated or user.role != User.Role.STUDENT:
+            raise serializers.ValidationError("Only student accounts can update lesson progress.")
+
+        if lesson and not Enrollment.objects.filter(student=user, course=lesson.course).exists():
+            raise serializers.ValidationError(
+                "Enroll in this course before marking lessons complete."
+            )
+
+        return attrs

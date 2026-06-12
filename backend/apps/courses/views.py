@@ -1,4 +1,6 @@
 from django.db.models import Count, Q
+from django.db.models.deletion import ProtectedError
+from django.utils import timezone
 from rest_framework import generics, permissions, status, viewsets
 from rest_framework.exceptions import PermissionDenied, ValidationError
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
@@ -6,20 +8,36 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.users.models import User
+from apps.users.serializers import UserSummarySerializer
 
-from .models import Category, Course, Enrollment, Lesson
+from .models import Category, Course, Enrollment, Lesson, LessonProgress
 from .permissions import IsCourseInstructorOrReadOnly, IsInstructor, IsStudent
-from .serializers import CategorySerializer, CourseSerializer, EnrollmentSerializer, LessonSerializer
+from .serializers import (
+    CategorySerializer,
+    CourseSerializer,
+    EnrollmentSerializer,
+    LessonProgressSerializer,
+    LessonSerializer,
+)
 
 
-class CategoryListCreateView(generics.ListCreateAPIView):
+class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    http_method_names = ("get", "post", "put", "patch", "delete", "head", "options")
 
     def get_permissions(self):
-        if self.request.method == "POST":
+        if self.action in {"create", "update", "partial_update", "destroy"}:
             return [permissions.IsAuthenticated(), IsInstructor()]
         return [permissions.IsAuthenticated()]
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            return super().destroy(request, *args, **kwargs)
+        except ProtectedError as exc:
+            raise ValidationError(
+                "This category has courses attached. Move or delete those courses first."
+            ) from exc
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -49,7 +67,22 @@ class CourseViewSet(viewsets.ModelViewSet):
         if mine in {"1", "true", "True"} and self.request.user.role == User.Role.INSTRUCTOR:
             queryset = queryset.filter(instructor=self.request.user)
 
-        return queryset
+        category_id = self.request.query_params.get("category")
+        if category_id:
+            queryset = queryset.filter(category_id=category_id)
+
+        instructor_id = self.request.query_params.get("instructor")
+        if instructor_id:
+            queryset = queryset.filter(instructor_id=instructor_id)
+
+        ordering = self.request.query_params.get("ordering", "newest")
+        ordering_map = {
+            "newest": "-created_at",
+            "oldest": "created_at",
+            "most_enrolled": "-enrollments_total",
+            "title": "title",
+        }
+        return queryset.order_by(ordering_map.get(ordering, "-created_at"))
 
     def get_permissions(self):
         if self.action == "create":
@@ -109,6 +142,42 @@ class LessonViewSet(viewsets.ModelViewSet):
             serializer.save()
         except Exception as exc:
             raise ValidationError("A lesson already exists for this course order.") from exc
+
+
+class LessonProgressViewSet(viewsets.ModelViewSet):
+    serializer_class = LessonProgressSerializer
+    http_method_names = ("get", "post", "head", "options")
+
+    def get_permissions(self):
+        return [permissions.IsAuthenticated(), IsStudent()]
+
+    def get_queryset(self):
+        queryset = LessonProgress.objects.select_related("student", "lesson", "lesson__course")
+        queryset = queryset.filter(student=self.request.user)
+
+        course_id = self.request.query_params.get("course")
+        if course_id:
+            queryset = queryset.filter(lesson__course_id=course_id)
+
+        return queryset
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        lesson = serializer.validated_data["lesson"]
+        completed = serializer.validated_data.get("completed", True)
+        progress, _created = LessonProgress.objects.get_or_create(
+            student=request.user,
+            lesson=lesson,
+            defaults={"completed": completed},
+        )
+        progress.completed = completed
+        progress.completed_at = timezone.now() if completed else None
+        progress.save(update_fields=("completed", "completed_at", "updated_at"))
+
+        response_serializer = self.get_serializer(progress)
+        return Response(response_serializer.data, status=status.HTTP_200_OK)
 
 
 class EnrollmentViewSet(viewsets.ModelViewSet):
@@ -177,3 +246,11 @@ class DashboardStatsView(APIView):
             payload["my_enrollments"] = payload["my_courses"]
 
         return Response(payload, status=status.HTTP_200_OK)
+
+
+class InstructorListView(generics.ListAPIView):
+    serializer_class = UserSummarySerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_queryset(self):
+        return User.objects.filter(role=User.Role.INSTRUCTOR, is_active=True).order_by("full_name")

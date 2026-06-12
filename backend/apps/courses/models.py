@@ -84,3 +84,33 @@ class Enrollment(models.Model):
 
     def __str__(self) -> str:
         return f"{self.student.email} -> {self.course.title}"
+
+
+class LessonProgress(models.Model):
+    student = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="lesson_progress",
+    )
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name="progress")
+    completed = models.BooleanField(default=False)
+    completed_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["lesson__course", "lesson__order"]
+        constraints = [
+            models.UniqueConstraint(fields=["student", "lesson"], name="unique_student_lesson_progress"),
+        ]
+        indexes = [
+            models.Index(fields=["student", "lesson"]),
+            models.Index(fields=["completed"]),
+        ]
+
+    def clean(self) -> None:
+        if self.student_id and self.student.role != "student":
+            raise ValidationError({"student": "Only student accounts can track lesson progress."})
+
+    def __str__(self) -> str:
+        status = "completed" if self.completed else "in progress"
+        return f"{self.student.email} - {self.lesson.title} ({status})"

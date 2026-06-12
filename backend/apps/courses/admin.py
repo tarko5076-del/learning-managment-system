@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Course, Enrollment, Lesson
+from .models import Category, Course, Enrollment, Lesson, LessonProgress
 
 
 @admin.register(Category)
@@ -31,3 +31,11 @@ class EnrollmentAdmin(admin.ModelAdmin):
     list_filter = ("enrollment_date",)
     search_fields = ("student__email", "student__full_name", "course__title")
     readonly_fields = ("enrollment_date",)
+
+
+@admin.register(LessonProgress)
+class LessonProgressAdmin(admin.ModelAdmin):
+    list_display = ("student", "lesson", "completed", "completed_at", "updated_at")
+    list_filter = ("completed", "completed_at", "updated_at")
+    search_fields = ("student__email", "student__full_name", "lesson__title", "lesson__course__title")
+    readonly_fields = ("completed_at", "updated_at")

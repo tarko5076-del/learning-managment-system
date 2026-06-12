@@ -2,7 +2,7 @@ from rest_framework import permissions
 
 
 class IsInstructor(permissions.BasePermission):
-    message = "Only instructors can perform this action."
+    message = "Only instructor accounts can create or manage courses, lessons, and categories."
 
     def has_permission(self, request, view):
         return bool(
@@ -13,7 +13,7 @@ class IsInstructor(permissions.BasePermission):
 
 
 class IsStudent(permissions.BasePermission):
-    message = "Only students can perform this action."
+    message = "Only student accounts can enroll in courses or track lesson progress."
 
     def has_permission(self, request, view):
         return bool(
@@ -24,7 +24,7 @@ class IsStudent(permissions.BasePermission):
 
 
 class IsCourseInstructorOrReadOnly(permissions.BasePermission):
-    message = "Only the course instructor can modify this resource."
+    message = "Only the instructor who owns this course can change or delete it."
 
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
