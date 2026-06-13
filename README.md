@@ -13,6 +13,8 @@ A Dockerized LMS assessment project using React, TypeScript, Tailwind CSS, Djang
 ```bash
 docker compose up -d
 ```
+to see service 
+docker ps
 
 Copy `.env.example` to `.env` if you want to customize credentials or local settings.
 
