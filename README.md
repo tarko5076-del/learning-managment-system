@@ -21,7 +21,7 @@ As a developer and designer, special attention was paid to the visual aesthetics
 
 | Login Screen (Dark Mode) | Student Dashboard (Light Mode) |
 |:---:|:---:|
-| ![Login Screen](screenshots/login_page.png) | ![Student Dashboard](screenshots/dashboard_light.png) |
+| ![Login Screen for desktop](screenshots/login.png) | ![login screen mobile](screenshots/dashboard_light.png) |
 
 | Course Learning Interface | Instructor Panel |
 |:---:|:---:|
@@ -76,6 +76,7 @@ docker compose exec backend python manage.py test
 *   **Backend**: Python, Django, Django REST Framework, SimpleJWT (JSON Web Token authentication).
 *   **Database**: PostgreSQL.
 *   **DevOps**: Docker, Docker Compose.
+*   figma    : for desgin
 
 ---
 
