@@ -1,13 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        ink: "#172033",
-        line: "#d8dee9",
-        mint: "#0f9f8f",
-        coral: "#ef6f61",
+        ink: "#1e1b4b",
+        line: "#e2e8f0",
+        mint: "#4f20f0",
+        coral: "#45c3b8",
+      },
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+        header: ["'Plus Jakarta Sans'", "sans-serif"],
       },
     },
   },
