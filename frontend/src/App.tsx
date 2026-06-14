@@ -13,8 +13,8 @@ import {
 } from "react-router-dom";
 import { z } from "zod";
 
-import loginIllustration from "./assets/login-illustration.png";
-import registerIllustration from "./assets/register-illustration.png";
+import loginImage from "./assets/loginimage.jpg";
+import register from "./assets/register.jpg";
 
 import type { AppDispatch, RootState } from "./app/store";
 import { logout, setCredentials, setUser } from "./features/auth/authSlice";
@@ -431,7 +431,7 @@ function LoginPage() {
       {/* Left Illustration column */}
       <div className="hidden md:flex md:w-1/2 bg-white dark:bg-slate-950 items-center justify-center p-12 select-none border-r border-[#e2e8f0]/40 dark:border-slate-900">
         <div className="flex flex-col items-center max-w-md">
-          <img src={loginIllustration} alt="Login Illustration" className="w-full h-auto object-contain max-h-[450px]" />
+          <img src={loginImage} alt="Login Illustration" className="w-full h-auto object-contain max-h-[450px]" />
           <div className="mt-8 text-center">
             <span className="block text-xs font-bold uppercase tracking-widest text-[#a0a5cc] dark:text-indigo-400/50 mb-1">Learn with us</span>
             <span className="block text-2xl md:text-3xl font-extrabold tracking-wide text-sky-500 dark:text-sky-400 font-sans">learn anytime, anywhere</span>
@@ -594,7 +594,7 @@ function RegisterPage() {
       {/* Left Illustration column */}
       <div className="hidden md:flex md:w-1/2 bg-[#45c3b8] dark:bg-slate-900 items-center justify-center p-12 select-none dark:border-r dark:border-slate-800/40">
         <div className="flex flex-col items-center max-w-md">
-          <img src={registerIllustration} alt="Register Illustration" className="w-full h-auto object-contain max-h-[450px]" />
+          <img src={register} alt="Register Illustration" className="w-full h-auto object-contain max-h-[450px]" />
         </div>
       </div>
 
