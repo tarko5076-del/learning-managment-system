@@ -216,17 +216,120 @@ function ErrorBanner({ error }: { error: unknown }) {
 
 function LoadingBlock({ label = "Loading..." }: { label?: string }) {
   return (
-    <div className="rounded-lg border border-line bg-white p-6 text-sm text-slate-600 shadow-sm">
+    <div className="rounded-lg border border-line bg-white dark:bg-slate-800 dark:border-slate-700 p-6 text-sm text-slate-600 dark:text-slate-400 shadow-sm">
       <div className="h-2 w-28 animate-pulse rounded-full bg-mint/30" />
       <p className="mt-3">{label}</p>
     </div>
   );
 }
 
+function CourseCardSkeleton() {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-indigo-50/50 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-md shadow-indigo-100/30 flex flex-col h-full font-sans animate-pulse">
+      <div className="h-44 w-full bg-slate-200 dark:bg-slate-700" />
+      <div className="p-6 flex flex-col flex-1">
+        <div className="flex-1">
+          <div className="h-4 w-16 bg-slate-200 dark:bg-slate-700 rounded-full" />
+          <div className="h-6 w-3/4 bg-slate-200 dark:bg-slate-700 rounded-md mt-4" />
+          <div className="h-4 w-full bg-slate-200 dark:bg-slate-700 rounded-md mt-3" />
+          <div className="h-4 w-5/6 bg-slate-200 dark:bg-slate-700 rounded-md mt-2" />
+        </div>
+        <div className="flex items-center gap-3 border-t border-indigo-50/50 dark:border-slate-700/50 pt-4 mt-5 mb-4">
+          <div className="h-3.5 w-16 bg-slate-200 dark:bg-slate-700 rounded-full" />
+          <div className="h-3.5 w-16 bg-slate-200 dark:bg-slate-700 rounded-full" />
+        </div>
+        <div className="flex gap-2.5">
+          <div className="h-9 bg-slate-200 dark:bg-slate-700 rounded-full flex-1" />
+          <div className="h-9 bg-slate-200 dark:bg-slate-700 rounded-full flex-1" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProfileSkeleton() {
+  return (
+    <div className="space-y-6 animate-pulse">
+      <div>
+        <div className="h-4 w-24 bg-slate-200 dark:bg-slate-700 rounded-md mb-2 ml-1" />
+        <div className="h-12 w-full bg-slate-200 dark:bg-slate-700 rounded-full" />
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2 py-2">
+        <div>
+          <div className="h-4 w-16 bg-slate-200 dark:bg-slate-700 rounded-md mb-2 ml-1" />
+          <div className="h-12 w-full bg-slate-200 dark:bg-slate-700 rounded-full" />
+        </div>
+        <div>
+          <div className="h-4 w-16 bg-slate-200 dark:bg-slate-700 rounded-md mb-2 ml-1" />
+          <div className="h-12 w-full bg-slate-200 dark:bg-slate-700 rounded-full" />
+        </div>
+      </div>
+      <div className="h-12 w-32 bg-slate-200 dark:bg-slate-700 rounded-full" />
+    </div>
+  );
+}
+
+function LessonListSkeleton() {
+  return (
+    <div className="space-y-4 animate-pulse">
+      {[1, 2, 3].map((n) => (
+        <div key={n} className="flex items-center gap-4 p-3 pr-6 rounded-full border border-indigo-50/50 dark:border-slate-700/50">
+          <div className="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 flex-shrink-0" />
+          <div className="min-w-0 flex-1 space-y-2">
+            <div className="h-4 w-1/3 bg-slate-200 dark:bg-slate-700 rounded-md" />
+            <div className="h-3 w-1/2 bg-slate-200 dark:bg-slate-700 rounded-md" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function CourseDetailsSkeleton() {
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 items-start animate-pulse">
+      <div className="space-y-8">
+        <div className="rounded-3xl border border-indigo-50/50 dark:border-slate-700/50 bg-white dark:bg-slate-800 p-6 sm:p-8 lg:p-10 shadow-xl shadow-indigo-100/20">
+          <div className="h-4 w-16 bg-slate-200 dark:bg-slate-700 rounded-full" />
+          <div className="h-8 w-3/4 bg-slate-200 dark:bg-slate-700 rounded-md mt-4" />
+          <div className="h-4 w-full bg-slate-200 dark:bg-slate-700 rounded-md mt-4" />
+          <div className="h-4 w-5/6 bg-slate-200 dark:bg-slate-700 rounded-md mt-2" />
+        </div>
+        <div className="rounded-3xl border border-indigo-50/50 dark:border-slate-700/50 bg-white dark:bg-slate-800 p-6 sm:p-8 shadow-xl shadow-indigo-100/20">
+          <div className="h-6 w-24 bg-slate-200 dark:bg-slate-700 rounded-md mb-6" />
+          <div className="space-y-4">
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="flex items-center gap-4 p-3 pr-6 rounded-full border border-indigo-50/50 dark:border-slate-700/50">
+                <div className="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 flex-shrink-0" />
+                <div className="min-w-0 flex-1 space-y-2">
+                  <div className="h-4 w-1/4 bg-slate-200 dark:bg-slate-700 rounded-md" />
+                  <div className="h-3 w-1/2 bg-slate-200 dark:bg-slate-700 rounded-md" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="rounded-3xl border border-indigo-50/50 dark:border-slate-700/50 bg-white dark:bg-slate-800 p-6 shadow-xl shadow-indigo-100/20 flex flex-col gap-6 w-full">
+        <div className="h-44 w-full bg-slate-200 dark:bg-slate-700 rounded-2xl" />
+        <div className="h-12 w-full bg-slate-200 dark:bg-slate-700 rounded-full" />
+        <div className="space-y-4 border-t border-indigo-50 dark:border-slate-700/50 pt-5">
+          {[1, 2, 3, 4].map((n) => (
+            <div key={n} className="flex items-center gap-3">
+              <div className="h-5 w-5 bg-slate-200 dark:bg-slate-700 rounded-full flex-shrink-0" />
+              <div className="h-4 w-1/2 bg-slate-200 dark:bg-slate-700 rounded-md" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function EmptyState({ title, children }: { title: string; children?: ReactNode }) {
   return (
-    <div className="rounded-lg border border-dashed border-line bg-white p-6 text-sm text-slate-600">
-      <p className="font-medium text-ink">{title}</p>
+    <div className="rounded-lg border border-dashed border-line dark:border-slate-800 bg-white dark:bg-slate-900 p-6 text-sm text-slate-600 dark:text-slate-400 transition-colors duration-300">
+      <p className="font-medium text-ink dark:text-slate-200">{title}</p>
       {children ? <div className="mt-2">{children}</div> : null}
     </div>
   );
@@ -255,12 +358,12 @@ function FormInput({
 }) {
   return (
     <div className="flex flex-col">
-      <label htmlFor={id} className="text-sm font-semibold text-[#3b2c85] mb-1.5 ml-1">
+      <label htmlFor={id} className="text-sm font-semibold text-[#3b2c85] dark:text-indigo-300 mb-1.5 ml-1">
         {label}
       </label>
       <div className="relative flex items-center">
         {icon && (
-          <div className="absolute left-4 text-indigo-400 pointer-events-none">
+          <div className="absolute left-4 text-indigo-400 dark:text-slate-500 pointer-events-none">
             {icon}
           </div>
         )}
@@ -270,12 +373,12 @@ function FormInput({
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`w-full rounded-full border bg-white py-3.5 pr-12 outline-none transition-all placeholder:text-slate-400 text-slate-800 ${
+          className={`w-full rounded-full border bg-white dark:bg-slate-950 py-3.5 pr-12 outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-600 text-slate-800 dark:text-slate-100 ${
             icon ? "pl-12" : "pl-6"
           } ${
             error
-              ? "border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-100"
-              : "border-indigo-200 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100"
+              ? "border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-100 dark:focus:ring-red-950/20"
+              : "border-indigo-200 dark:border-slate-700 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-950/40"
           }`}
         />
         {rightElement && (
@@ -324,28 +427,28 @@ function LoginPage() {
   };
 
   return (
-    <main className="flex min-h-screen bg-white text-slate-800">
+    <main className="flex min-h-screen bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
       {/* Left Illustration column */}
-      <div className="hidden md:flex md:w-1/2 bg-white items-center justify-center p-12 select-none">
+      <div className="hidden md:flex md:w-1/2 bg-white dark:bg-slate-950 items-center justify-center p-12 select-none border-r border-[#e2e8f0]/40 dark:border-slate-900">
         <div className="flex flex-col items-center max-w-md">
           <img src={loginIllustration} alt="Login Illustration" className="w-full h-auto object-contain max-h-[450px]" />
           <div className="mt-8 text-center">
-            <span className="block text-xs font-bold uppercase tracking-widest text-[#a0a5cc] mb-1">Learn with us</span>
-            <span className="block text-2xl md:text-3xl font-extrabold tracking-wide text-sky-500 font-sans">learn anytime, anywhere</span>
+            <span className="block text-xs font-bold uppercase tracking-widest text-[#a0a5cc] dark:text-indigo-400/50 mb-1">Learn with us</span>
+            <span className="block text-2xl md:text-3xl font-extrabold tracking-wide text-sky-500 dark:text-sky-400 font-sans">learn anytime, anywhere</span>
           </div>
         </div>
       </div>
 
       {/* Right Form column */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-20 bg-white">
+      <div className="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-20 bg-white dark:bg-slate-950">
         <div className="w-full max-w-[420px] flex flex-col justify-center">
           <div className="text-center mb-4">
-            <span className="text-sm font-semibold tracking-wider text-indigo-500 uppercase">Welcome to LMS</span>
+            <span className="text-sm font-semibold tracking-wider text-indigo-500 dark:text-indigo-400 uppercase">Welcome to LMS</span>
           </div>
 
           {/* Toggle Switch */}
           <div className="flex justify-center mb-8">
-            <div className="bg-[#2f2070] rounded-full p-1.5 flex w-full max-w-[280px] shadow-inner">
+            <div className="bg-[#2f2070] dark:bg-slate-900 rounded-full p-1.5 flex w-full max-w-[280px] shadow-inner">
               <Link
                 to="/login"
                 className="flex-1 text-center py-2.5 text-sm font-semibold rounded-full bg-[#4f20f0] text-white shadow-md transition-all duration-200"
@@ -354,14 +457,14 @@ function LoginPage() {
               </Link>
               <Link
                 to="/register"
-                className="flex-1 text-center py-2.5 text-sm font-semibold rounded-full text-indigo-200 hover:text-white transition-all duration-200"
+                className="flex-1 text-center py-2.5 text-sm font-semibold rounded-full text-indigo-200 dark:text-slate-400 hover:text-white transition-all duration-200"
               >
                 Register
               </Link>
             </div>
           </div>
 
-          <h1 className="text-2xl font-bold text-[#1e1b4b] mb-8 text-center md:text-left">Welcome back</h1>
+          <h1 className="text-2xl font-bold text-[#1e1b4b] dark:text-white mb-8 text-center md:text-left">Welcome back</h1>
 
           <form className="space-y-5" onSubmit={handleSubmit}>
             {serverError ? <ErrorBanner error={serverError} /> : null}
@@ -399,7 +502,7 @@ function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="text-slate-400 hover:text-slate-600 transition-colors focus:outline-none"
+                  className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors focus:outline-none"
                 >
                   {showPassword ? (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -416,21 +519,21 @@ function LoginPage() {
             />
 
             <div className="flex items-center justify-between mt-2 select-none">
-              <label className="flex items-center space-x-2 text-sm text-slate-500 cursor-pointer">
+              <label className="flex items-center space-x-2 text-sm text-slate-500 dark:text-slate-400 cursor-pointer">
                 <input
                   type="checkbox"
-                  className="w-4 h-4 rounded text-[#4f20f0] border-slate-300 focus:ring-[#4f20f0] transition"
+                  className="w-4 h-4 rounded text-[#4f20f0] border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 focus:ring-[#4f20f0] transition"
                 />
                 <span className="font-medium">Remember me</span>
               </label>
-              <a href="#" className="text-sm font-semibold text-slate-500 hover:text-[#4f20f0] hover:underline transition">
+              <a href="#" className="text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-[#4f20f0] hover:underline transition">
                 Forgot Password ?
               </a>
             </div>
 
             <div className="flex justify-center sm:justify-end">
               <button
-                className="w-full sm:w-auto px-16 py-3.5 mt-8 text-sm font-bold text-white bg-[#4f20f0] rounded-full hover:bg-[#3b1cd9] transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 shadow-lg shadow-indigo-100"
+                className="w-full sm:w-auto px-16 py-3.5 mt-8 text-sm font-bold text-white bg-[#4f20f0] rounded-full hover:bg-[#3b1cd9] transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 shadow-lg dark:shadow-none"
                 disabled={isLoading}
                 type="submit"
               >
@@ -487,27 +590,27 @@ function RegisterPage() {
   };
 
   return (
-    <main className="flex min-h-screen bg-white text-slate-800">
+    <main className="flex min-h-screen bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
       {/* Left Illustration column */}
-      <div className="hidden md:flex md:w-1/2 bg-[#45c3b8] items-center justify-center p-12 select-none">
+      <div className="hidden md:flex md:w-1/2 bg-[#45c3b8] dark:bg-slate-900 items-center justify-center p-12 select-none dark:border-r dark:border-slate-800/40">
         <div className="flex flex-col items-center max-w-md">
           <img src={registerIllustration} alt="Register Illustration" className="w-full h-auto object-contain max-h-[450px]" />
         </div>
       </div>
 
       {/* Right Form column */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-20 bg-white">
+      <div className="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-20 bg-white dark:bg-slate-950">
         <div className="w-full max-w-[420px] flex flex-col justify-center">
           <div className="text-center mb-4">
-            <span className="text-sm font-semibold tracking-wider text-indigo-500 uppercase">Welcome to lms</span>
+            <span className="text-sm font-semibold tracking-wider text-indigo-500 dark:text-indigo-400 uppercase">Welcome to lms</span>
           </div>
 
           {/* Toggle Switch */}
           <div className="flex justify-center mb-8">
-            <div className="bg-[#2f2070] rounded-full p-1.5 flex w-full max-w-[280px] shadow-inner">
+            <div className="bg-[#2f2070] dark:bg-slate-900 rounded-full p-1.5 flex w-full max-w-[280px] shadow-inner">
               <Link
                 to="/login"
-                className="flex-1 text-center py-2.5 text-sm font-semibold rounded-full text-indigo-200 hover:text-white transition-all duration-200"
+                className="flex-1 text-center py-2.5 text-sm font-semibold rounded-full text-indigo-200 dark:text-slate-400 hover:text-white transition-all duration-200"
               >
                 Login
               </Link>
@@ -520,7 +623,7 @@ function RegisterPage() {
             </div>
           </div>
 
-          <h1 className="text-2xl font-bold text-[#1e1b4b] mb-8 text-center md:text-left">Create your Account</h1>
+          <h1 className="text-2xl font-bold text-[#1e1b4b] dark:text-white mb-8 text-center md:text-left">Create your Account</h1>
 
           <form className="space-y-5" onSubmit={handleSubmit}>
             {serverError ? <ErrorBanner error={serverError} /> : null}
@@ -534,7 +637,7 @@ function RegisterPage() {
               onChange={(val) => setValues((c) => ({ ...c, email: val }))}
               error={errors.email}
               icon={
-                <svg className="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <svg className="w-5 h-5 text-indigo-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               }
@@ -548,18 +651,18 @@ function RegisterPage() {
               onChange={(val) => setValues((c) => ({ ...c, full_name: val }))}
               error={errors.full_name}
               icon={
-                <svg className="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <svg className="w-5 h-5 text-indigo-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               }
             />
 
             <div className="flex flex-col">
-              <label htmlFor="register-role" className="text-sm font-semibold text-[#3b2c85] mb-1.5 ml-1">
+              <label htmlFor="register-role" className="text-sm font-semibold text-[#3b2c85] dark:text-indigo-300 mb-1.5 ml-1">
                 Role
               </label>
               <div className="relative flex items-center">
-                <div className="absolute left-4 text-indigo-400 pointer-events-none">
+                <div className="absolute left-4 text-indigo-400 dark:text-slate-500 pointer-events-none">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
@@ -568,12 +671,12 @@ function RegisterPage() {
                   id="register-role"
                   value={values.role}
                   onChange={(e) => setValues((c) => ({ ...c, role: e.target.value as Role }))}
-                  className="w-full rounded-full border border-indigo-200 bg-white py-3.5 pl-12 pr-12 text-sm outline-none transition-all text-slate-800 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 font-sans cursor-pointer appearance-none"
+                  className="w-full rounded-full border border-indigo-200 dark:border-slate-700 bg-white dark:bg-slate-950 py-3.5 pl-12 pr-12 text-sm outline-none transition-all text-slate-800 dark:text-slate-100 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-950/40 font-sans cursor-pointer appearance-none"
                 >
-                  <option value="student">Student</option>
-                  <option value="instructor">Instructor</option>
+                  <option value="student" className="dark:bg-slate-900">Student</option>
+                  <option value="instructor" className="dark:bg-slate-900">Instructor</option>
                 </select>
-                <div className="absolute right-4 text-slate-400 pointer-events-none">
+                <div className="absolute right-4 text-slate-400 dark:text-slate-500 pointer-events-none">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
@@ -591,7 +694,7 @@ function RegisterPage() {
               onChange={(val) => setValues((c) => ({ ...c, password: val }))}
               error={errors.password}
               icon={
-                <svg className="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <svg className="w-5 h-5 text-indigo-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M7 11V7a5 5 0 0110 0v4" />
                 </svg>
@@ -600,7 +703,7 @@ function RegisterPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="text-slate-400 hover:text-slate-600 transition-colors focus:outline-none"
+                  className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors focus:outline-none"
                 >
                   {showPassword ? (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -618,7 +721,7 @@ function RegisterPage() {
 
             <div className="flex justify-center sm:justify-end">
               <button
-                className="w-full sm:w-auto px-16 py-3.5 mt-8 text-sm font-bold text-white bg-[#4f20f0] rounded-full hover:bg-[#3b1cd9] transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 shadow-lg shadow-indigo-100"
+                className="w-full sm:w-auto px-16 py-3.5 mt-8 text-sm font-bold text-white bg-[#4f20f0] rounded-full hover:bg-[#3b1cd9] transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 shadow-lg dark:shadow-none"
                 disabled={isLoading}
                 type="submit"
               >
@@ -725,6 +828,27 @@ function AppLayout() {
   const { data: profile } = useGetProfileQuery(undefined, { skip: !accessToken });
   const [logoutSession] = useLogoutSessionMutation();
 
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        return savedTheme === "dark";
+      }
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
   useEffect(() => {
     if (profile) {
       dispatch(setUser(profile));
@@ -756,7 +880,7 @@ function AppLayout() {
       .slice()
       .reverse()
       .find((item) => item.path !== "/" && location.pathname.startsWith(item.path))?.label ??
-    (location.pathname === "/" ? "Dashboard" : "Course Details");
+      (location.pathname === "/" ? "Dashboard" : "Course Details");
 
   const handleLogout = async () => {
     try {
@@ -770,9 +894,9 @@ function AppLayout() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-ink font-sans">
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-slate-950 text-ink dark:text-slate-100 font-sans transition-colors duration-300">
       <div className="flex min-h-screen">
-        <aside className="hidden w-64 border-r border-[#e2e8f0] bg-[#1e1b4b] px-6 py-8 md:block flex-shrink-0">
+        <aside className="hidden w-64 border-r border-[#e2e8f0] dark:border-slate-800 bg-[#1e1b4b] dark:bg-slate-900 px-6 py-8 md:block flex-shrink-0">
           <Link className="flex items-center gap-2 text-2xl font-black tracking-wider text-white font-header" to="/">
             <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#4f20f0] text-white shadow-lg shadow-indigo-500/20 text-lg">
               L
@@ -787,7 +911,7 @@ function AppLayout() {
                     "flex items-center gap-3 rounded-full px-5 py-3 text-sm font-bold transition-all duration-200 font-header",
                     isActive
                       ? "bg-[#4f20f0] text-white shadow-lg shadow-[#4f20f0]/30"
-                      : "text-indigo-200 hover:bg-[#2f2070] hover:text-white",
+                      : "text-indigo-200 dark:text-slate-400 hover:bg-[#2f2070] dark:hover:bg-slate-800 hover:text-white dark:hover:text-white",
                   ].join(" ")
                 }
                 end={item.path === "/"}
@@ -802,18 +926,37 @@ function AppLayout() {
         </aside>
 
         <main className="min-w-0 flex-1">
-          <header className="border-b border-[#e2e8f0] bg-white px-6 py-5 sm:px-8">
+          <header className="border-b border-[#e2e8f0] dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-5 sm:px-8 transition-colors duration-300">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <div>
                 <p className="text-xs font-bold uppercase tracking-wider text-[#4f20f0] font-header">Learning Management System</p>
-                <h1 className="mt-1 text-2xl font-extrabold text-[#1e1b4b] font-header">{currentTitle}</h1>
+                <h1 className="mt-1 text-2xl font-extrabold text-[#1e1b4b] dark:text-white font-header">{currentTitle}</h1>
               </div>
               <div className="flex flex-wrap items-center gap-3">
-                <span className="rounded-full border border-indigo-100 bg-indigo-50/50 px-4 py-2 text-sm font-semibold text-[#3b2c85]">
+                <span className="rounded-full border border-indigo-100 dark:border-slate-800 bg-indigo-50/50 dark:bg-slate-800/50 px-4 py-2 text-sm font-semibold text-[#3b2c85] dark:text-indigo-300">
                   {user?.full_name ?? "Account"} - {roleLabel(user?.role)}
                 </span>
+                
+                {/* Dark Mode Toggle Button */}
                 <button
-                  className="rounded-full border border-indigo-100 bg-white px-5 py-2.5 text-sm font-bold text-slate-600 hover:bg-[#4f20f0] hover:text-white hover:border-[#4f20f0] shadow-sm hover:shadow-lg hover:shadow-indigo-100 active:scale-[0.98] transition-all font-sans"
+                  className="rounded-full border border-indigo-100 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700 active:scale-95 shadow-sm transition-all"
+                  onClick={() => setDarkMode(!darkMode)}
+                  type="button"
+                  aria-label="Toggle dark mode"
+                >
+                  {darkMode ? (
+                    <svg className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464-5.536a1 1 0 010 1.414l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464a1 1 0 10-1.414 1.414l.707.707a1 1 0 001.414-1.414l-.707-.707zm1.414 8.486a1 1 0 01-1.414 0l-.707-.707a1 1 0 011.414-1.414l.707.707a1 1 0 010 1.414zm11.086-1.414a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707z" clipRule="evenodd" />
+                    </svg>
+                  ) : (
+                    <svg className="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                    </svg>
+                  )}
+                </button>
+
+                <button
+                  className="rounded-full border border-indigo-100 dark:border-slate-700 bg-white dark:bg-slate-800 px-5 py-2.5 text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-[#4f20f0] hover:text-white dark:hover:bg-[#4f20f0] dark:hover:text-white hover:border-[#4f20f0] dark:hover:border-[#4f20f0] shadow-sm hover:shadow-lg hover:shadow-indigo-100 dark:hover:shadow-none active:scale-[0.98] transition-all font-sans"
                   onClick={handleLogout}
                   type="button"
                 >
@@ -829,7 +972,7 @@ function AppLayout() {
                       "flex items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-xs font-bold transition-all font-header",
                       isActive
                         ? "bg-[#4f20f0] text-white shadow-md shadow-[#4f20f0]/20"
-                        : "bg-indigo-50 text-[#3b2c85] hover:bg-indigo-100",
+                        : "bg-indigo-50 dark:bg-slate-800 text-[#3b2c85] dark:text-slate-300 hover:bg-indigo-100 dark:hover:bg-slate-700",
                     ].join(" ")
                   }
                   end={item.path === "/"}
@@ -911,12 +1054,12 @@ function DashboardPage() {
       {/* Responsive Stat Grid */}
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {statCards.map((stat) => (
-          <div className="rounded-2xl border border-indigo-50 bg-white p-6 shadow-md shadow-indigo-100/50 flex items-center justify-between transition-all duration-300 hover:shadow-lg hover:shadow-indigo-100/50 hover:translate-y-[-2px]" key={stat.label}>
+          <div className="rounded-2xl border border-indigo-50 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-md shadow-indigo-100/50 dark:shadow-none flex items-center justify-between transition-all duration-300 hover:shadow-lg hover:shadow-indigo-100/50 dark:hover:shadow-none hover:translate-y-[-2px]" key={stat.label}>
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-slate-400 font-sans">{stat.label}</p>
-              <p className="mt-1.5 text-3xl font-extrabold text-[#1e1b4b] font-header">
+              <p className="mt-1.5 text-3xl font-extrabold text-[#1e1b4b] dark:text-white font-header">
                 {statsLoading ? (
-                  <span className="block h-8 w-12 animate-pulse rounded bg-slate-100" />
+                  <span className="block h-8 w-12 animate-pulse rounded bg-slate-100 dark:bg-slate-700" />
                 ) : (
                   stat.value
                 )}
@@ -928,13 +1071,13 @@ function DashboardPage() {
       </div>
 
       {/* Available Courses panel */}
-      <div className="rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-100/20">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-indigo-50 pb-6">
+      <div className="rounded-3xl border border-indigo-50/50 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-xl shadow-indigo-100/20 dark:shadow-none">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-indigo-50 dark:border-slate-800 pb-6">
           <div>
-            <h2 className="text-xl font-extrabold text-[#1e1b4b] font-header">
+            <h2 className="text-xl font-extrabold text-[#1e1b4b] dark:text-white font-header">
               {user?.role === "instructor" ? "My Course Activity" : "Available Courses"}
             </h2>
-            <p className="mt-1 text-sm text-slate-500 font-sans">
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400 font-sans">
               {user?.role === "instructor"
                 ? `${stats?.my_enrollments ?? 0} enrollments across your courses`
                 : "Browse and continue learning"}
@@ -950,7 +1093,11 @@ function DashboardPage() {
 
         <div className="mt-8">
           {coursesLoading ? (
-            <LoadingBlock />
+            <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              {[1, 2, 3].map((n) => (
+                <CourseCardSkeleton key={n} />
+              ))}
+            </div>
           ) : courses.length ? (
             <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {courses.slice(0, 3).map((course) => (
@@ -976,7 +1123,7 @@ function CourseCard({ course }: { course: Course }) {
   };
 
   return (
-    <article className="overflow-hidden rounded-2xl border border-indigo-50/50 bg-white shadow-md shadow-indigo-100/30 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-100/60 hover:translate-y-[-4px] hover:scale-[1.02] flex flex-col h-full font-sans">
+    <article className="overflow-hidden rounded-2xl border border-indigo-50/50 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-md shadow-indigo-100/30 dark:shadow-none transition-all duration-300 hover:shadow-xl hover:shadow-indigo-100/60 dark:hover:shadow-none hover:translate-y-[-4px] hover:scale-[1.02] flex flex-col h-full font-sans">
       {course.thumbnail_url ? (
         <img alt={course.title} className="h-44 w-full object-cover" src={course.thumbnail_url} />
       ) : (
@@ -986,27 +1133,42 @@ function CourseCard({ course }: { course: Course }) {
       )}
       <div className="p-6 flex flex-col flex-1">
         <div className="flex-1">
-          <span className="inline-block bg-[#45c3b8]/10 text-[#45c3b8] font-bold px-3 py-1 rounded-full text-xs font-sans tracking-wide">
+          <span className="inline-block bg-[#45c3b8]/10 text-[#45c3b8] dark:bg-[#45c3b8]/20 font-bold px-3 py-1 rounded-full text-xs font-sans tracking-wide">
             {course.category.name}
           </span>
-          <h3 className="mt-3 text-lg font-extrabold text-[#1e1b4b] font-header line-clamp-1 hover:text-[#4f20f0] transition-colors">
+          <h3 className="mt-3 text-lg font-extrabold text-[#1e1b4b] dark:text-white font-header line-clamp-1 hover:text-[#4f20f0] dark:hover:text-indigo-400 transition-colors">
             {course.title}
           </h3>
-          <p className="mt-2 text-sm text-slate-500 font-sans line-clamp-3 leading-relaxed">
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400 font-sans line-clamp-3 leading-relaxed">
             {course.description}
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold text-slate-400 font-sans border-t border-indigo-50/50 pt-4 mt-5 mb-4">
+        {user?.role === "student" && learned && (
+          <div className="mt-4 mb-2">
+            <div className="flex justify-between items-center text-xs font-bold text-[#3b2c85] dark:text-indigo-300 mb-1">
+              <span>Progress</span>
+              <span>{Math.round(course.progress_percentage ?? 0)}%</span>
+            </div>
+            <div className="h-2 w-full bg-indigo-50 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-[#4f20f0] to-[#45c3b8] rounded-full transition-all duration-500" 
+                style={{ width: `${course.progress_percentage ?? 0}%` }}
+              />
+            </div>
+          </div>
+        )}
+
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold text-slate-400 dark:text-slate-500 font-sans border-t border-indigo-50/50 dark:border-slate-800/50 pt-4 mt-5 mb-4">
           <span className="flex items-center gap-1">
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <svg className="w-3.5 h-3.5 text-indigo-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
             {course.lessons_count} lessons
           </span>
           <span>•</span>
           <span className="flex items-center gap-1">
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <svg className="w-3.5 h-3.5 text-indigo-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
             {course.enrollments_count} enrolled
@@ -1019,14 +1181,14 @@ function CourseCard({ course }: { course: Course }) {
 
         <div className="flex gap-2.5">
           <Link
-            className="rounded-full border border-indigo-100 px-5 py-2.5 text-xs font-bold text-slate-600 hover:bg-indigo-50/50 hover:text-[#4f20f0] hover:border-[#4f20f0] transition-all font-sans text-center flex-1"
+            className="rounded-full border border-indigo-100 dark:border-slate-700 bg-white dark:bg-slate-800 px-5 py-2.5 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-indigo-50/50 dark:hover:bg-slate-700 hover:text-[#4f20f0] dark:hover:text-[#4f20f0] hover:border-[#4f20f0] dark:hover:border-[#4f20f0] transition-all font-sans text-center flex-1"
             to={`/courses/${course.id}`}
           >
             View
           </Link>
           {user?.role === "student" && learned ? (
             <Link
-              className="rounded-full bg-[#4f20f0] px-5 py-2.5 text-xs font-bold text-white shadow-md shadow-indigo-500/10 hover:bg-[#3b1cd9] transition-all hover:scale-[1.02] active:scale-[0.98] text-center flex-1 font-sans"
+              className="rounded-full bg-[#4f20f0] px-5 py-2.5 text-xs font-bold text-white shadow-md dark:shadow-none hover:bg-[#3b1cd9] transition-all hover:scale-[1.02] active:scale-[0.98] text-center flex-1 font-sans"
               to={`/learn/${course.id}`}
             >
               Learn
@@ -1034,7 +1196,7 @@ function CourseCard({ course }: { course: Course }) {
           ) : null}
           {user?.role === "student" && !learned ? (
             <button
-              className="rounded-full bg-[#4f20f0] px-5 py-2.5 text-xs font-bold text-white shadow-md shadow-indigo-500/10 hover:bg-[#3b1cd9] transition-all hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 text-center flex-1 font-sans"
+              className="rounded-full bg-[#4f20f0] px-5 py-2.5 text-xs font-bold text-white shadow-md dark:shadow-none hover:bg-[#3b1cd9] transition-all hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 text-center flex-1 font-sans"
               disabled={isLoading}
               onClick={handleEnroll}
               type="button"
@@ -1054,21 +1216,21 @@ function CoursesPage() {
 
   return (
     <section className="space-y-8 px-6 py-8 sm:px-8 max-w-7xl mx-auto font-sans">
-      <div className="flex flex-col gap-5 rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-100/20 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-5 rounded-3xl border border-indigo-50/50 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-xl shadow-indigo-100/20 dark:shadow-none sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-extrabold text-[#1e1b4b] font-header">Course Catalog</h2>
-          <p className="mt-1 text-sm text-slate-500 font-sans">
+          <h2 className="text-2xl font-extrabold text-[#1e1b4b] dark:text-white font-header">Course Catalog</h2>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400 font-sans">
             {isLoading ? "Searching..." : `${courses.length} courses available`}
           </p>
         </div>
         <div className="relative flex items-center w-full sm:max-w-md">
-          <div className="absolute left-4 text-indigo-400 pointer-events-none">
+          <div className="absolute left-4 text-indigo-400 dark:text-slate-500 pointer-events-none">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
           <input
-            className="w-full rounded-full border border-indigo-100 bg-[#f8fafc] py-3.5 pl-12 pr-6 text-sm outline-none transition-all placeholder:text-slate-400 text-slate-800 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 focus:bg-white font-sans"
+            className="w-full rounded-full border border-indigo-100 dark:border-slate-700 bg-[#f8fafc] dark:bg-slate-950 py-3.5 pl-12 pr-6 text-sm outline-none transition-all placeholder:text-slate-400 text-slate-800 dark:text-slate-100 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-950 focus:bg-white dark:focus:bg-slate-900 font-sans"
             onChange={(event) => setSearch(event.target.value)}
             placeholder="Search courses..."
             value={search}
@@ -1078,7 +1240,11 @@ function CoursesPage() {
 
       {error ? <ErrorBanner error={error} /> : null}
       {isLoading ? (
-        <LoadingBlock />
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {[1, 2, 3, 4, 5, 6].map((n) => (
+            <CourseCardSkeleton key={n} />
+          ))}
+        </div>
       ) : courses.length ? (
         <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {courses.map((course) => (
@@ -1123,7 +1289,7 @@ function CourseDetailsPage() {
   if (isLoading) {
     return (
       <section className="px-6 py-8 max-w-7xl mx-auto font-sans">
-        <LoadingBlock />
+        <CourseDetailsSkeleton />
       </section>
     );
   }
@@ -1142,40 +1308,46 @@ function CourseDetailsPage() {
         {/* Left column: main course details & lessons */}
         <div className="space-y-8">
           {/* Main Info Card */}
-          <div className="rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 lg:p-10 shadow-xl shadow-indigo-100/20">
-            <span className="inline-block bg-[#45c3b8]/10 text-[#45c3b8] font-bold px-3 py-1 rounded-full text-xs font-sans tracking-wide">
+          <div className="rounded-3xl border border-indigo-50/50 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 lg:p-10 shadow-xl shadow-indigo-100/20 dark:shadow-none">
+            <span className="inline-block bg-[#45c3b8]/10 text-[#45c3b8] dark:bg-[#45c3b8]/20 font-bold px-3 py-1 rounded-full text-xs font-sans tracking-wide">
               {course.category.name}
             </span>
-            <h2 className="mt-4 text-2xl sm:text-3xl font-extrabold text-[#1e1b4b] font-header leading-tight">
+            <h2 className="mt-4 text-2xl sm:text-3xl font-extrabold text-[#1e1b4b] dark:text-white font-header leading-tight">
               {course.title}
             </h2>
-            <p className="mt-4 text-sm sm:text-base text-slate-500 font-sans leading-relaxed">
+            <p className="mt-4 text-sm sm:text-base text-slate-500 dark:text-slate-400 font-sans leading-relaxed">
               {course.description}
             </p>
           </div>
 
           {/* Lessons Card */}
-          <div className="rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-100/20">
-            <h3 className="text-xl font-extrabold text-[#1e1b4b] font-header border-b border-indigo-50 pb-4 mb-6">Lessons</h3>
+          <div className="rounded-3xl border border-indigo-50/50 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-xl shadow-indigo-100/20 dark:shadow-none">
+            <h3 className="text-xl font-extrabold text-[#1e1b4b] dark:text-white font-header border-b border-indigo-50 dark:border-slate-800 pb-4 mb-6">Lessons</h3>
             {!canAccessLessons ? (
-              <div className="rounded-2xl bg-[#f8fafc] p-6 text-center border border-indigo-50/50">
-                <svg className="w-10 h-10 text-indigo-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <div className="rounded-2xl bg-[#f8fafc] dark:bg-slate-950 p-6 text-center border border-indigo-50/50 dark:border-slate-800">
+                <svg className="w-10 h-10 text-indigo-300 dark:text-slate-700 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
-                <p className="text-sm font-semibold text-[#1e1b4b] font-sans">Enroll in this course to access lessons.</p>
+                <p className="text-sm font-semibold text-[#1e1b4b] dark:text-slate-300 font-sans">Enroll in this course to access lessons.</p>
               </div>
             ) : lessonsLoading ? (
-              <LoadingBlock />
+              <LessonListSkeleton />
             ) : lessons.length ? (
               <div className="space-y-4">
                 {lessons.map((lesson) => (
-                  <div className="flex items-center gap-4 p-3 pr-6 rounded-full border border-indigo-50/50 hover:bg-[#f8fafc]/80 transition-all duration-200" key={lesson.id}>
-                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-indigo-50 text-[#4f20f0] font-bold text-sm font-header">
-                      {lesson.order}
+                  <div className="flex items-center gap-4 p-3 pr-6 rounded-full border border-indigo-50/50 dark:border-slate-800 hover:bg-[#f8fafc]/80 dark:hover:bg-slate-800/50 transition-all duration-200" key={lesson.id}>
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-indigo-50 dark:bg-slate-800 text-[#4f20f0] dark:text-indigo-400 font-bold text-sm font-header">
+                      {lesson.is_completed ? (
+                        <svg className="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      ) : (
+                        lesson.order
+                      )}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h4 className="font-bold text-[#1e1b4b] font-sans truncate">{lesson.title}</h4>
-                      <p className="text-xs text-slate-500 font-sans truncate">{lesson.content}</p>
+                      <h4 className="font-bold text-[#1e1b4b] dark:text-white font-sans truncate">{lesson.title}</h4>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 font-sans truncate">{lesson.content}</p>
                     </div>
                   </div>
                 ))}
@@ -1187,9 +1359,9 @@ function CourseDetailsPage() {
         </div>
 
         {/* Right column: Sticky checkout & metadata card */}
-        <aside className="rounded-3xl border border-indigo-50/50 bg-white p-6 shadow-xl shadow-indigo-100/20 lg:sticky lg:top-8 flex flex-col gap-6 w-full">
+        <aside className="rounded-3xl border border-indigo-50/50 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xl shadow-indigo-100/20 dark:shadow-none lg:sticky lg:top-8 flex flex-col gap-6 w-full">
           {/* Course Thumbnail */}
-          <div className="relative h-48 sm:h-56 lg:h-44 w-full overflow-hidden rounded-2xl shadow-inner bg-slate-100">
+          <div className="relative h-48 sm:h-56 lg:h-44 w-full overflow-hidden rounded-2xl shadow-inner bg-slate-100 dark:bg-slate-950">
             {course.thumbnail_url ? (
               <img alt={course.title} className="h-full w-full object-cover" src={course.thumbnail_url} />
             ) : (
@@ -1225,7 +1397,7 @@ function CourseDetailsPage() {
 
             {user?.role === "instructor" && (
               <Link
-                className="w-full text-center inline-block rounded-full border border-indigo-100 px-8 py-3.5 text-sm font-bold text-slate-600 hover:bg-indigo-50/50 hover:text-[#4f20f0] hover:border-[#4f20f0] transition-all font-sans"
+                className="w-full text-center inline-block rounded-full border border-indigo-100 dark:border-slate-700 px-8 py-3.5 text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-indigo-50/50 dark:hover:bg-slate-800 hover:text-[#4f20f0] dark:hover:text-indigo-400 hover:border-[#4f20f0] dark:hover:border-[#4f20f0] transition-all font-sans"
                 to="/instructor/courses"
               >
                 Manage courses
@@ -1234,30 +1406,30 @@ function CourseDetailsPage() {
           </div>
 
           {/* Metadata list */}
-          <div className="space-y-4 border-t border-indigo-50 pt-5">
-            <div className="flex items-center gap-3 text-sm text-slate-600 font-sans">
-              <svg className="w-5 h-5 text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+          <div className="space-y-4 border-t border-indigo-50 dark:border-slate-800 pt-5">
+            <div className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300 font-sans">
+              <svg className="w-5 h-5 text-indigo-400 dark:text-indigo-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
-              <span>Instructor: <strong className="text-[#1e1b4b] font-bold">{course.instructor.full_name}</strong></span>
+              <span>Instructor: <strong className="text-[#1e1b4b] dark:text-white font-bold">{course.instructor.full_name}</strong></span>
             </div>
-            <div className="flex items-center gap-3 text-sm text-slate-600 font-sans">
-              <svg className="w-5 h-5 text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <div className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300 font-sans">
+              <svg className="w-5 h-5 text-indigo-400 dark:text-indigo-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
-              <span>Lessons: <strong className="text-[#1e1b4b] font-bold">{course.lessons_count}</strong></span>
+              <span>Lessons: <strong className="text-[#1e1b4b] dark:text-white font-bold">{course.lessons_count}</strong></span>
             </div>
-            <div className="flex items-center gap-3 text-sm text-slate-600 font-sans">
-              <svg className="w-5 h-5 text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <div className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300 font-sans">
+              <svg className="w-5 h-5 text-indigo-400 dark:text-indigo-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
-              <span>Enrollments: <strong className="text-[#1e1b4b] font-bold">{course.enrollments_count}</strong></span>
+              <span>Enrollments: <strong className="text-[#1e1b4b] dark:text-white font-bold">{course.enrollments_count}</strong></span>
             </div>
-            <div className="flex items-center gap-3 text-sm text-slate-600 font-sans">
-              <svg className="w-5 h-5 text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <div className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300 font-sans">
+              <svg className="w-5 h-5 text-indigo-400 dark:text-indigo-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              <span>Created: <strong className="text-[#1e1b4b] font-bold">{formatDate(course.created_at)}</strong></span>
+              <span>Created: <strong className="text-[#1e1b4b] dark:text-white font-bold">{formatDate(course.created_at)}</strong></span>
             </div>
           </div>
         </aside>
@@ -1467,7 +1639,7 @@ function InstructorCoursesPage() {
           {error ? <ErrorBanner error={error} /> : null}
           {deleteError ? <ErrorBanner error={deleteError} /> : null}
           {isLoading ? (
-            <LoadingBlock />
+            <LessonListSkeleton />
           ) : courses.length ? (
             courses.map((course) => (
               <div
@@ -1725,7 +1897,7 @@ function InstructorLessonsPage() {
 
         <div>
           {coursesLoading ? (
-            <LoadingBlock />
+            <ProfileSkeleton />
           ) : selectedCourseId ? (
             <LessonForm
               courseId={selectedCourseId}
@@ -1751,7 +1923,7 @@ function InstructorLessonsPage() {
           {error ? <ErrorBanner error={error} /> : null}
           {deleteError ? <ErrorBanner error={deleteError} /> : null}
           {isLoading ? (
-            <LoadingBlock />
+            <LessonListSkeleton />
           ) : lessons.length ? (
             lessons.map((lesson) => (
               <div
@@ -1796,16 +1968,20 @@ function MyCoursesPage() {
 
   return (
     <section className="space-y-8 px-6 py-8 sm:px-8 max-w-7xl mx-auto font-sans">
-      <div className="border-b border-indigo-50 pb-5">
-        <h2 className="text-2xl font-extrabold text-[#1e1b4b] font-header">My Enrolled Courses</h2>
-        <p className="mt-1 text-sm text-slate-500 font-sans">
+      <div className="border-b border-indigo-50 dark:border-slate-800 pb-5">
+        <h2 className="text-2xl font-extrabold text-[#1e1b4b] dark:text-white font-header">My Enrolled Courses</h2>
+        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400 font-sans">
           {isLoading ? "Loading your courses..." : `You are enrolled in ${courses.length} courses`}
         </p>
       </div>
 
       {error ? <ErrorBanner error={error} /> : null}
       {isLoading ? (
-        <LoadingBlock />
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {[1, 2, 3].map((n) => (
+            <CourseCardSkeleton key={n} />
+          ))}
+        </div>
       ) : courses.length ? (
         <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {courses.map((course) => (
@@ -1839,6 +2015,7 @@ function LearningPage() {
     isLoading: lessonsLoading,
   } = useGetLessonsQuery({ course: id ?? "" }, { skip: !id || !canAccess });
   const [activeLessonId, setActiveLessonId] = useState<number | null>(null);
+  const [updateProgress, { isLoading: isUpdatingProgress }] = useUpdateLessonProgressMutation();
 
   useEffect(() => {
     if (lessons.length && !lessons.some((lesson) => lesson.id === activeLessonId)) {
@@ -1848,10 +2025,22 @@ function LearningPage() {
 
   const activeLesson = lessons.find((lesson) => lesson.id === activeLessonId) ?? lessons[0];
 
+  const handleToggleComplete = async () => {
+    if (!activeLesson) return;
+    try {
+      await updateProgress({
+        lesson_id: activeLesson.id,
+        completed: !activeLesson.is_completed,
+      }).unwrap();
+    } catch {
+      // Ignored: mutation handles feedback or triggers state updates
+    }
+  };
+
   if (courseLoading) {
     return (
       <section className="px-6 py-8 max-w-7xl mx-auto font-sans">
-        <LoadingBlock />
+        <CourseDetailsSkeleton />
       </section>
     );
   }
@@ -1878,29 +2067,69 @@ function LearningPage() {
 
   const embedUrl = activeLesson?.video_url ? getYoutubeEmbedUrl(activeLesson.video_url) : "";
 
+  const completedLessons = lessons.filter((l) => l.is_completed).length;
+  const totalLessons = lessons.length;
+  const progressPercent = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+
   return (
     <section className="grid gap-6 px-6 py-8 sm:px-8 max-w-7xl mx-auto font-sans grid-cols-1 lg:grid-cols-[300px_1fr]">
       {/* Sidebar navigator */}
-      <aside className="rounded-3xl border border-indigo-50/50 bg-white p-5 shadow-xl shadow-indigo-100/20 self-start w-full">
-        <h2 className="text-lg font-extrabold text-[#1e1b4b] font-header border-b border-indigo-50 pb-3 mb-4 truncate">{course.title}</h2>
+      <aside className="rounded-3xl border border-indigo-50/50 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-xl shadow-indigo-100/20 dark:shadow-none self-start w-full transition-colors duration-300">
+        <div className="border-b border-indigo-50 dark:border-slate-800 pb-4 mb-4">
+          <h2 className="text-lg font-extrabold text-[#1e1b4b] dark:text-white font-header truncate">{course.title}</h2>
+          {user?.role === "student" && (
+            <div className="mt-3">
+              <div className="flex justify-between items-center text-xs font-bold text-[#3b2c85] dark:text-indigo-300 mb-1">
+                <span>Course Progress</span>
+                <span>{progressPercent}%</span>
+              </div>
+              <div className="h-2 w-full bg-[#f8fafc] dark:bg-slate-950 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-[#4f20f0] to-[#45c3b8] rounded-full transition-all duration-300"
+                  style={{ width: `${progressPercent}%` }}
+                />
+              </div>
+              <p className="mt-1.5 text-2xs text-slate-500 dark:text-slate-400 font-semibold">
+                {completedLessons} of {totalLessons} lessons completed
+              </p>
+            </div>
+          )}
+        </div>
+        
         <div className="space-y-2 max-h-[500px] overflow-y-auto pr-1">
           {lessonsError ? <ErrorBanner error={lessonsError} /> : null}
           {lessonsLoading ? (
-            <LoadingBlock />
+            <LessonListSkeleton />
           ) : lessons.length ? (
             lessons.map((lesson) => (
               <button
                 className={[
-                  "w-full rounded-full px-5 py-3 text-left text-sm font-bold transition-all duration-200 font-sans",
+                  "w-full rounded-xl px-4 py-3 text-left text-sm font-bold transition-all duration-200 font-sans flex items-center gap-3",
                   activeLesson?.id === lesson.id
                     ? "bg-[#4f20f0] text-white shadow-md shadow-indigo-500/10"
-                    : "bg-[#f8fafc] text-slate-700 hover:bg-indigo-50/50 hover:text-[#4f20f0]",
+                    : "bg-[#f8fafc] dark:bg-slate-950 text-slate-700 dark:text-slate-300 hover:bg-indigo-50/50 dark:hover:bg-slate-800/50 hover:text-[#4f20f0] dark:hover:text-indigo-400",
                 ].join(" ")}
                 key={lesson.id}
                 onClick={() => setActiveLessonId(lesson.id)}
                 type="button"
               >
-                {lesson.order}. {lesson.title}
+                {/* Visual completion / active state icon */}
+                {lesson.is_completed ? (
+                  <svg className="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                ) : activeLesson?.id === lesson.id ? (
+                  <svg className="w-5 h-5 text-white animate-pulse flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5 text-indigo-400 dark:text-slate-600 hover:text-[#4f20f0] dark:hover:text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )}
+                <span className="truncate">{lesson.order}. {lesson.title}</span>
               </button>
             ))
           ) : (
@@ -1910,18 +2139,18 @@ function LearningPage() {
       </aside>
 
       {/* Main Content Player */}
-      <article className="rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-100/20 flex flex-col justify-between h-full">
+      <article className="rounded-3xl border border-indigo-50/50 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-xl shadow-indigo-100/20 dark:shadow-none flex flex-col justify-between h-full transition-colors duration-300">
         {activeLesson ? (
           <div>
-            <span className="inline-block bg-[#45c3b8]/10 text-[#45c3b8] font-bold px-3 py-1 rounded-full text-xs font-sans tracking-wide">
+            <span className="inline-block bg-[#45c3b8]/10 text-[#45c3b8] dark:bg-[#45c3b8]/20 font-bold px-3 py-1 rounded-full text-xs font-sans tracking-wide">
               Lesson {activeLesson.order}
             </span>
-            <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#1e1b4b] font-header leading-tight">{activeLesson.title}</h2>
+            <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#1e1b4b] dark:text-white font-header leading-tight">{activeLesson.title}</h2>
             
             {activeLesson.video_url ? (
               <div className="mt-6">
                 {embedUrl ? (
-                  <div className="aspect-video w-full overflow-hidden rounded-2xl border border-indigo-50 shadow-inner bg-slate-100 mb-6">
+                  <div className="aspect-video w-full overflow-hidden rounded-2xl border border-indigo-50 dark:border-slate-800 shadow-inner bg-slate-100 dark:bg-slate-950 mb-6">
                     <iframe
                       title={activeLesson.title}
                       src={embedUrl}
@@ -1932,7 +2161,7 @@ function LearningPage() {
                   </div>
                 ) : (
                   <a
-                    className="inline-flex rounded-full border border-indigo-100 bg-white px-6 py-2.5 text-sm font-bold text-[#4f20f0] hover:bg-[#4f20f0] hover:text-white hover:border-[#4f20f0] shadow-sm hover:shadow-md transition-all font-sans items-center gap-2 mb-6"
+                    className="inline-flex rounded-full border border-indigo-100 dark:border-slate-700 bg-white dark:bg-slate-800 px-6 py-2.5 text-sm font-bold text-[#4f20f0] dark:text-indigo-400 hover:bg-[#4f20f0] dark:hover:bg-[#4f20f0] hover:text-white dark:hover:text-white hover:border-[#4f20f0] dark:hover:border-[#4f20f0] shadow-sm hover:shadow-md transition-all font-sans items-center gap-2 mb-6"
                     href={activeLesson.video_url}
                     rel="noreferrer"
                     target="_blank"
@@ -1945,7 +2174,33 @@ function LearningPage() {
                 )}
               </div>
             ) : null}
-            <p className="mt-5 whitespace-pre-line leading-relaxed text-slate-600 font-sans text-sm sm:text-base">{activeLesson.content}</p>
+            <p className="mt-5 whitespace-pre-line leading-relaxed text-slate-600 dark:text-slate-300 font-sans text-sm sm:text-base">{activeLesson.content}</p>
+
+            {/* Complete / Toggle completion button */}
+            {user?.role === "student" && (
+              <button
+                onClick={handleToggleComplete}
+                disabled={isUpdatingProgress}
+                className={[
+                  "mt-8 flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed",
+                  activeLesson.is_completed
+                    ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-500/20"
+                    : "bg-[#4f20f0] hover:bg-[#3b1cd9] text-white shadow-lg shadow-indigo-500/20"
+                ].join(" ")}
+                type="button"
+              >
+                {activeLesson.is_completed ? (
+                  <>
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Completed</span>
+                  </>
+                ) : (
+                  <span>Mark as Completed</span>
+                )}
+              </button>
+            )}
           </div>
         ) : (
           <EmptyState title="Select a lesson to begin." />
@@ -1993,10 +2248,10 @@ function ProfilePage() {
 
   return (
     <section className="space-y-8 px-6 py-8 sm:px-8 max-w-7xl mx-auto font-sans">
-      <div className="max-w-2xl rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-100/20">
-        <h2 className="text-xl font-extrabold text-[#1e1b4b] font-header border-b border-indigo-50 pb-4 mb-6">Profile</h2>
+      <div className="max-w-2xl rounded-3xl border border-indigo-50/50 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-xl shadow-indigo-100/20 dark:shadow-none">
+        <h2 className="text-xl font-extrabold text-[#1e1b4b] dark:text-white font-header border-b border-indigo-50 dark:border-slate-800 pb-4 mb-6">Profile</h2>
         <div className="space-y-4">
-          {isLoading ? <LoadingBlock /> : null}
+          {isLoading ? <ProfileSkeleton /> : null}
           {error ? <ErrorBanner error={error} /> : null}
           {serverError ? <ErrorBanner error={serverError} /> : null}
           {saved ? (
@@ -2007,11 +2262,11 @@ function ProfilePage() {
           {profile ? (
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
-                <label className="text-sm font-semibold text-[#3b2c85] mb-1.5 ml-1 block" htmlFor="profile-name">
+                <label className="text-sm font-semibold text-[#3b2c85] dark:text-indigo-300 mb-1.5 ml-1 block" htmlFor="profile-name">
                   Full Name
                 </label>
                 <input
-                  className="w-full rounded-full border border-indigo-200 bg-white py-3.5 px-6 text-sm outline-none transition-all placeholder:text-slate-400 text-slate-800 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 font-sans"
+                  className="w-full rounded-full border border-indigo-200 dark:border-slate-700 bg-white dark:bg-slate-950 py-3.5 px-6 text-sm outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-600 text-slate-800 dark:text-slate-100 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-950 font-sans"
                   id="profile-name"
                   onChange={(event) => setFullName(event.target.value)}
                   value={fullName}
@@ -2020,12 +2275,12 @@ function ProfilePage() {
               </div>
               <div className="grid gap-4 sm:grid-cols-2 py-2">
                 <div>
-                  <p className="text-sm text-slate-500 font-semibold mb-1 ml-1">Email</p>
-                  <p className="font-semibold text-[#1e1b4b] bg-[#f8fafc] rounded-full px-6 py-3 border border-indigo-50/50 text-sm select-all">{profile.email}</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 font-semibold mb-1 ml-1">Email</p>
+                  <p className="font-semibold text-[#1e1b4b] dark:text-slate-200 bg-[#f8fafc] dark:bg-slate-950 rounded-full px-6 py-3 border border-indigo-50/50 dark:border-slate-800 text-sm select-all">{profile.email}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-slate-500 font-semibold mb-1 ml-1">Role</p>
-                  <p className="font-semibold text-[#1e1b4b] bg-[#f8fafc] rounded-full px-6 py-3 border border-indigo-50/50 text-sm">{roleLabel(profile.role)}</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 font-semibold mb-1 ml-1">Role</p>
+                  <p className="font-semibold text-[#1e1b4b] dark:text-slate-200 bg-[#f8fafc] dark:bg-slate-950 rounded-full px-6 py-3 border border-indigo-50/50 dark:border-slate-800 text-sm">{roleLabel(profile.role)}</p>
                 </div>
               </div>
               <button
