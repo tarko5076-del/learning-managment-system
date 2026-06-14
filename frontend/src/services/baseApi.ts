@@ -23,6 +23,7 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
 
 const clearSession = (api: Parameters<BaseQueryFn>[1]) => {
   api.dispatch(logout());
+  api.dispatch(baseApi.util.resetApiState());
 
   if (window.location.pathname !== "/login") {
     window.location.assign("/login");
