@@ -9,6 +9,7 @@ import { type FieldErrors, getErrorMessage, toFieldErrors } from "../utils/helpe
 import { FormInput } from "../components/ui/FormInput";
 import { ErrorBanner } from "../components/ui/ErrorBanner";
 import loginImage from "../assets/loginimage.jpg";
+import { useTheme } from "../components/ThemeContext";
 
 export function LoginPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,6 +20,7 @@ export function LoginPage() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [serverError, setServerError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { isDark, toggleTheme } = useTheme();
 
   const from =
     (location.state as { from?: { pathname?: string } } | null)?.from?.pathname ?? "/";
@@ -45,7 +47,26 @@ export function LoginPage() {
   };
 
   return (
-    <main className="flex min-h-screen bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
+    <main className="relative flex min-h-screen bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
+      {/* Floating Theme Toggle */}
+      <div className="absolute top-6 right-6 z-10">
+        <button
+          onClick={toggleTheme}
+          className="rounded-full border border-slate-200 dark:border-slate-800 bg-white/85 dark:bg-slate-900/85 backdrop-blur-sm p-3 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-95 shadow-sm transition-all"
+          type="button"
+          aria-label="Toggle dark mode"
+        >
+          {isDark ? (
+            <svg className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464-5.536a1 1 0 010 1.414l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464a1 1 0 10-1.414 1.414l.707.707a1 1 0 001.414-1.414l-.707-.707zm1.414 8.486a1 1 0 01-1.414 0l-.707-.707a1 1 0 011.414-1.414l.707.707a1 1 0 010 1.414zm11.086-1.414a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707z" clipRule="evenodd" />
+            </svg>
+          ) : (
+            <svg className="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+            </svg>
+          )}
+        </button>
+      </div>
       {/* Left Illustration column */}
       <div className="hidden md:flex md:w-1/2 bg-white dark:bg-slate-950 items-center justify-center p-12 select-none border-r border-[#e2e8f0]/40 dark:border-slate-900">
         <div className="flex flex-col items-center max-w-md">
@@ -60,7 +81,14 @@ export function LoginPage() {
       {/* Right Form column */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-20 bg-white dark:bg-slate-950">
         <div className="w-full max-w-[420px] flex flex-col justify-center">
-          <div className="text-center mb-4">
+          <div className="text-center mb-4 flex flex-col items-center">
+            <div className="w-14 h-14 bg-indigo-50 dark:bg-slate-900 rounded-full flex items-center justify-center mb-3 shadow-md shadow-indigo-100 dark:shadow-none border border-indigo-100/40 dark:border-slate-800">
+              <svg className="w-8 h-8 text-[#4f20f0] dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 14v7" />
+              </svg>
+            </div>
             <span className="text-sm font-semibold tracking-wider text-indigo-500 dark:text-indigo-400 uppercase">Welcome to LMS</span>
           </div>
 

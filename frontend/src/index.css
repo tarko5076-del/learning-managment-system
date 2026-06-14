@@ -2,8 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html, body {
+    @apply bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300;
+  }
+}
+
 body {
-  background-color: white;
   margin: 0;
   font-family: 'Inter', sans-serif;
 }

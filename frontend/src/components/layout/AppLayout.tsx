@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import type { AppDispatch, RootState } from "../../app/store";
@@ -6,6 +6,7 @@ import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { logout, setUser } from "../../features/auth/authSlice";
 import { lmsApi, useGetProfileQuery, useLogoutSessionMutation } from "../../services/lmsApi";
 import { roleLabel } from "../../utils/helpers";
+import { useTheme } from "../ThemeContext";
 
 const renderNavIcon = (label: string) => {
   const baseClass = "w-5 h-5 flex-shrink-0";
@@ -60,26 +61,7 @@ export function AppLayout() {
   const user = useCurrentUser();
   const { data: profile } = useGetProfileQuery(undefined, { skip: !accessToken });
   const [logoutSession] = useLogoutSessionMutation();
-
-  const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window !== "undefined") {
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme) {
-        return savedTheme === "dark";
-      }
-    }
-    return false;
-  });
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
+  const { isDark: darkMode, toggleTheme } = useTheme();
 
   useEffect(() => {
     if (profile) {
@@ -173,7 +155,7 @@ export function AppLayout() {
                 {/* Dark Mode Toggle Button */}
                 <button
                   className="rounded-full border border-indigo-100 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700 active:scale-95 shadow-sm transition-all"
-                  onClick={() => setDarkMode(!darkMode)}
+                  onClick={toggleTheme}
                   type="button"
                   aria-label="Toggle dark mode"
                 >
