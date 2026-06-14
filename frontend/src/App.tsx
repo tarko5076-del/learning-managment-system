@@ -520,7 +520,7 @@ function RegisterPage() {
             </div>
           </div>
 
-          <h1 className="text-2xl font-bold text-[#1e1b4b] mb-8 text-center md:text-left">Sign in Your Account</h1>
+          <h1 className="text-2xl font-bold text-[#1e1b4b] mb-8 text-center md:text-left">Create your Account</h1>
 
           <form className="space-y-5" onSubmit={handleSubmit}>
             {serverError ? <ErrorBanner error={serverError} /> : null}
@@ -553,6 +553,34 @@ function RegisterPage() {
                 </svg>
               }
             />
+
+            <div className="flex flex-col">
+              <label htmlFor="register-role" className="text-sm font-semibold text-[#3b2c85] mb-1.5 ml-1">
+                Role
+              </label>
+              <div className="relative flex items-center">
+                <div className="absolute left-4 text-indigo-400 pointer-events-none">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                </div>
+                <select
+                  id="register-role"
+                  value={values.role}
+                  onChange={(e) => setValues((c) => ({ ...c, role: e.target.value as Role }))}
+                  className="w-full rounded-full border border-indigo-200 bg-white py-3.5 pl-12 pr-12 text-sm outline-none transition-all text-slate-800 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 font-sans cursor-pointer appearance-none"
+                >
+                  <option value="student">Student</option>
+                  <option value="instructor">Instructor</option>
+                </select>
+                <div className="absolute right-4 text-slate-400 pointer-events-none">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
+              <FieldError message={errors.role} />
+            </div>
 
             <FormInput
               id="register-password"
@@ -643,6 +671,51 @@ function RequireRole({ children, role }: { children: ReactNode; role: Role }) {
   return <>{children}</>;
 }
 
+const renderNavIcon = (label: string) => {
+  const baseClass = "w-5 h-5 flex-shrink-0";
+  switch (label) {
+    case "Dashboard":
+      return (
+        <svg className={baseClass} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z" />
+        </svg>
+      );
+    case "Courses":
+      return (
+        <svg className={baseClass} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+      );
+    case "My Courses":
+      return (
+        <svg className={baseClass} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+        </svg>
+      );
+    case "Manage Courses":
+      return (
+        <svg className={baseClass} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      );
+    case "Manage Lessons":
+      return (
+        <svg className={baseClass} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        </svg>
+      );
+    case "Profile":
+      return (
+        <svg className={baseClass} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+};
+
 function AppLayout() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
@@ -697,44 +770,50 @@ function AppLayout() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-ink">
+    <div className="min-h-screen bg-[#f8fafc] text-ink font-sans">
       <div className="flex min-h-screen">
-        <aside className="hidden w-64 border-r border-line bg-white px-5 py-6 md:block">
-          <Link className="text-xl font-bold" to="/">
-            LMS
+        <aside className="hidden w-64 border-r border-[#e2e8f0] bg-[#1e1b4b] px-6 py-8 md:block flex-shrink-0">
+          <Link className="flex items-center gap-2 text-2xl font-black tracking-wider text-white font-header" to="/">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#4f20f0] text-white shadow-lg shadow-indigo-500/20 text-lg">
+              L
+            </span>
+            <span>LMS</span>
           </Link>
-          <nav className="mt-8 space-y-1">
+          <nav className="mt-10 space-y-2">
             {navItems.map((item) => (
               <NavLink
                 className={({ isActive }) =>
                   [
-                    "block rounded-md px-3 py-2 text-sm font-medium",
-                    isActive ? "bg-mint text-white" : "text-slate-700 hover:bg-slate-100",
+                    "flex items-center gap-3 rounded-full px-5 py-3 text-sm font-bold transition-all duration-200 font-header",
+                    isActive
+                      ? "bg-[#4f20f0] text-white shadow-lg shadow-[#4f20f0]/30"
+                      : "text-indigo-200 hover:bg-[#2f2070] hover:text-white",
                   ].join(" ")
                 }
                 end={item.path === "/"}
                 key={item.path}
                 to={item.path}
               >
-                {item.label}
+                {renderNavIcon(item.label)}
+                <span>{item.label}</span>
               </NavLink>
             ))}
           </nav>
         </aside>
 
         <main className="min-w-0 flex-1">
-          <header className="border-b border-line bg-white px-4 py-4 sm:px-6">
+          <header className="border-b border-[#e2e8f0] bg-white px-6 py-5 sm:px-8">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <div>
-                <p className="text-sm font-semibold text-mint">Learning Management System</p>
-                <h1 className="mt-1 text-2xl font-bold">{currentTitle}</h1>
+                <p className="text-xs font-bold uppercase tracking-wider text-[#4f20f0] font-header">Learning Management System</p>
+                <h1 className="mt-1 text-2xl font-extrabold text-[#1e1b4b] font-header">{currentTitle}</h1>
               </div>
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="rounded-md border border-line px-3 py-2 text-sm font-medium">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="rounded-full border border-indigo-100 bg-indigo-50/50 px-4 py-2 text-sm font-semibold text-[#3b2c85]">
                   {user?.full_name ?? "Account"} - {roleLabel(user?.role)}
                 </span>
                 <button
-                  className="rounded-md border border-line px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100"
+                  className="rounded-full border border-indigo-100 bg-white px-5 py-2.5 text-sm font-bold text-slate-600 hover:bg-[#4f20f0] hover:text-white hover:border-[#4f20f0] shadow-sm hover:shadow-lg hover:shadow-indigo-100 active:scale-[0.98] transition-all font-sans"
                   onClick={handleLogout}
                   type="button"
                 >
@@ -742,20 +821,23 @@ function AppLayout() {
                 </button>
               </div>
             </div>
-            <nav className="mt-4 flex gap-2 overflow-x-auto pb-1 md:hidden">
+            <nav className="mt-4 flex gap-2 overflow-x-auto pb-1 md:hidden scrollbar-none">
               {navItems.map((item) => (
                 <NavLink
                   className={({ isActive }) =>
                     [
-                      "whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium",
-                      isActive ? "bg-mint text-white" : "bg-slate-100 text-slate-700",
+                      "flex items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-xs font-bold transition-all font-header",
+                      isActive
+                        ? "bg-[#4f20f0] text-white shadow-md shadow-[#4f20f0]/20"
+                        : "bg-indigo-50 text-[#3b2c85] hover:bg-indigo-100",
                     ].join(" ")
                   }
                   end={item.path === "/"}
                   key={item.path}
                   to={item.path}
                 >
-                  {item.label}
+                  {renderNavIcon(item.label)}
+                  <span>{item.label}</span>
                 </NavLink>
               ))}
             </nav>
@@ -776,49 +858,101 @@ function DashboardPage() {
   );
 
   const statCards = [
-    { label: "Total Courses", value: stats?.total_courses ?? 0 },
-    { label: "Total Students", value: stats?.total_students ?? 0 },
-    { label: "Total Enrollments", value: stats?.total_enrollments ?? 0 },
-    { label: user?.role === "instructor" ? "My Courses" : "Enrolled Courses", value: stats?.my_courses ?? 0 },
+    {
+      label: "Total Courses",
+      value: stats?.total_courses ?? 0,
+      icon: (
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#4f20f0]/10 text-[#4f20f0]">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+      ),
+    },
+    {
+      label: "Total Students",
+      value: stats?.total_students ?? 0,
+      icon: (
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#45c3b8]/10 text-[#45c3b8]">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </div>
+      ),
+    },
+    {
+      label: "Total Enrollments",
+      value: stats?.total_enrollments ?? 0,
+      icon: (
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#4f20f0]/10 text-[#4f20f0]">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+      ),
+    },
+    {
+      label: user?.role === "instructor" ? "My Courses" : "Enrolled Courses",
+      value: stats?.my_courses ?? 0,
+      icon: (
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#45c3b8]/10 text-[#45c3b8]">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+          </svg>
+        </div>
+      ),
+    },
   ];
 
   return (
-    <section className="space-y-6 px-4 py-6 sm:px-6">
+    <section className="space-y-8 px-6 py-8 sm:px-8 max-w-7xl mx-auto">
       {statsError ? <ErrorBanner error={statsError} /> : null}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      
+      {/* Responsive Stat Grid */}
+      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {statCards.map((stat) => (
-          <div className="rounded-lg border border-line bg-white p-5 shadow-sm" key={stat.label}>
-            <p className="text-sm text-slate-500">{stat.label}</p>
-            <p className="mt-3 text-3xl font-bold">{statsLoading ? "..." : stat.value}</p>
+          <div className="rounded-2xl border border-indigo-50 bg-white p-6 shadow-md shadow-indigo-100/50 flex items-center justify-between transition-all duration-300 hover:shadow-lg hover:shadow-indigo-100/50 hover:translate-y-[-2px]" key={stat.label}>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-400 font-sans">{stat.label}</p>
+              <p className="mt-1.5 text-3xl font-extrabold text-[#1e1b4b] font-header">
+                {statsLoading ? (
+                  <span className="block h-8 w-12 animate-pulse rounded bg-slate-100" />
+                ) : (
+                  stat.value
+                )}
+              </p>
+            </div>
+            {stat.icon}
           </div>
         ))}
       </div>
 
-      <div className="rounded-lg border border-line bg-white p-5 shadow-sm">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      {/* Available Courses panel */}
+      <div className="rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-100/20">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-indigo-50 pb-6">
           <div>
-            <h2 className="text-lg font-semibold">
+            <h2 className="text-xl font-extrabold text-[#1e1b4b] font-header">
               {user?.role === "instructor" ? "My Course Activity" : "Available Courses"}
             </h2>
-            <p className="mt-1 text-sm text-slate-500">
+            <p className="mt-1 text-sm text-slate-500 font-sans">
               {user?.role === "instructor"
                 ? `${stats?.my_enrollments ?? 0} enrollments across your courses`
                 : "Browse and continue learning"}
             </p>
           </div>
           <Link
-            className="rounded-md bg-mint px-4 py-2 text-sm font-semibold text-white hover:bg-mint/90"
+            className="rounded-full bg-[#4f20f0] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-500/20 hover:bg-[#3b1cd9] transition-all hover:scale-[1.02] active:scale-[0.98] text-center font-sans"
             to={user?.role === "instructor" ? "/instructor/courses" : "/courses"}
           >
             {user?.role === "instructor" ? "+ New Course" : "Browse Courses"}
           </Link>
         </div>
 
-        <div className="mt-5">
+        <div className="mt-8">
           {coursesLoading ? (
             <LoadingBlock />
           ) : courses.length ? (
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {courses.slice(0, 3).map((course) => (
                 <CourseCard course={course} key={course.id} />
               ))}
@@ -842,38 +976,57 @@ function CourseCard({ course }: { course: Course }) {
   };
 
   return (
-    <article className="overflow-hidden rounded-lg border border-line bg-white shadow-sm">
+    <article className="overflow-hidden rounded-2xl border border-indigo-50/50 bg-white shadow-md shadow-indigo-100/30 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-100/60 hover:translate-y-[-4px] hover:scale-[1.02] flex flex-col h-full font-sans">
       {course.thumbnail_url ? (
-        <img alt={course.title} className="h-36 w-full object-cover" src={course.thumbnail_url} />
+        <img alt={course.title} className="h-44 w-full object-cover" src={course.thumbnail_url} />
       ) : (
-        <div className="flex h-36 items-center justify-center bg-slate-100 text-4xl font-bold text-mint">
+        <div className="flex h-44 w-full items-center justify-center bg-gradient-to-br from-[#4f20f0] to-[#6d44fc] text-4xl font-extrabold text-white font-header shadow-inner select-none">
           {course.title.charAt(0).toUpperCase()}
         </div>
       )}
-      <div className="space-y-4 p-4">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-coral">
+      <div className="p-6 flex flex-col flex-1">
+        <div className="flex-1">
+          <span className="inline-block bg-[#45c3b8]/10 text-[#45c3b8] font-bold px-3 py-1 rounded-full text-xs font-sans tracking-wide">
             {course.category.name}
+          </span>
+          <h3 className="mt-3 text-lg font-extrabold text-[#1e1b4b] font-header line-clamp-1 hover:text-[#4f20f0] transition-colors">
+            {course.title}
+          </h3>
+          <p className="mt-2 text-sm text-slate-500 font-sans line-clamp-3 leading-relaxed">
+            {course.description}
           </p>
-          <h3 className="mt-1 text-lg font-semibold">{course.title}</h3>
-          <p className="mt-2 line-clamp-3 text-sm text-slate-600">{course.description}</p>
         </div>
-        <div className="flex flex-wrap gap-2 text-xs text-slate-500">
-          <span>{course.lessons_count} lessons</span>
-          <span>{course.enrollments_count} enrolled</span>
-          <span>By {course.instructor.full_name}</span>
+
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold text-slate-400 font-sans border-t border-indigo-50/50 pt-4 mt-5 mb-4">
+          <span className="flex items-center gap-1">
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            {course.lessons_count} lessons
+          </span>
+          <span>•</span>
+          <span className="flex items-center gap-1">
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            {course.enrollments_count} enrolled
+          </span>
+          <span>•</span>
+          <span className="truncate max-w-[120px]">By {course.instructor.full_name}</span>
         </div>
-        {error ? <ErrorBanner error={error} /> : null}
-        <div className="flex flex-wrap gap-2">
+
+        {error ? <div className="mb-3"><ErrorBanner error={error} /></div> : null}
+
+        <div className="flex gap-2.5">
           <Link
-            className="rounded-md border border-line px-3 py-2 text-sm font-semibold hover:bg-slate-100"
+            className="rounded-full border border-indigo-100 px-5 py-2.5 text-xs font-bold text-slate-600 hover:bg-indigo-50/50 hover:text-[#4f20f0] hover:border-[#4f20f0] transition-all font-sans text-center flex-1"
             to={`/courses/${course.id}`}
           >
             View
           </Link>
           {user?.role === "student" && learned ? (
             <Link
-              className="rounded-md bg-mint px-3 py-2 text-sm font-semibold text-white hover:bg-mint/90"
+              className="rounded-full bg-[#4f20f0] px-5 py-2.5 text-xs font-bold text-white shadow-md shadow-indigo-500/10 hover:bg-[#3b1cd9] transition-all hover:scale-[1.02] active:scale-[0.98] text-center flex-1 font-sans"
               to={`/learn/${course.id}`}
             >
               Learn
@@ -881,7 +1034,7 @@ function CourseCard({ course }: { course: Course }) {
           ) : null}
           {user?.role === "student" && !learned ? (
             <button
-              className="rounded-md bg-mint px-3 py-2 text-sm font-semibold text-white hover:bg-mint/90 disabled:cursor-not-allowed disabled:opacity-60"
+              className="rounded-full bg-[#4f20f0] px-5 py-2.5 text-xs font-bold text-white shadow-md shadow-indigo-500/10 hover:bg-[#3b1cd9] transition-all hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 text-center flex-1 font-sans"
               disabled={isLoading}
               onClick={handleEnroll}
               type="button"
@@ -900,25 +1053,34 @@ function CoursesPage() {
   const { data: courses = [], error, isLoading } = useGetCoursesQuery({ search });
 
   return (
-    <section className="space-y-5 px-4 py-6 sm:px-6">
-      <div className="flex flex-col gap-3 rounded-lg border border-line bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+    <section className="space-y-8 px-6 py-8 sm:px-8 max-w-7xl mx-auto font-sans">
+      <div className="flex flex-col gap-5 rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-100/20 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-lg font-semibold">Course Catalog</h2>
-          <p className="mt-1 text-sm text-slate-500">{courses.length} courses found</p>
+          <h2 className="text-2xl font-extrabold text-[#1e1b4b] font-header">Course Catalog</h2>
+          <p className="mt-1 text-sm text-slate-500 font-sans">
+            {isLoading ? "Searching..." : `${courses.length} courses available`}
+          </p>
         </div>
-        <input
-          className="w-full rounded-md border border-line px-3 py-2 outline-none focus:border-mint focus:ring-2 focus:ring-mint/20 sm:max-w-sm"
-          onChange={(event) => setSearch(event.target.value)}
-          placeholder="Search courses"
-          value={search}
-        />
+        <div className="relative flex items-center w-full sm:max-w-md">
+          <div className="absolute left-4 text-indigo-400 pointer-events-none">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <input
+            className="w-full rounded-full border border-indigo-100 bg-[#f8fafc] py-3.5 pl-12 pr-6 text-sm outline-none transition-all placeholder:text-slate-400 text-slate-800 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 focus:bg-white font-sans"
+            onChange={(event) => setSearch(event.target.value)}
+            placeholder="Search courses..."
+            value={search}
+          />
+        </div>
       </div>
 
       {error ? <ErrorBanner error={error} /> : null}
       {isLoading ? (
         <LoadingBlock />
       ) : courses.length ? (
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {courses.map((course) => (
             <CourseCard course={course} key={course.id} />
           ))}
@@ -960,7 +1122,7 @@ function CourseDetailsPage() {
 
   if (isLoading) {
     return (
-      <section className="px-4 py-6 sm:px-6">
+      <section className="px-6 py-8 max-w-7xl mx-auto font-sans">
         <LoadingBlock />
       </section>
     );
@@ -968,82 +1130,137 @@ function CourseDetailsPage() {
 
   if (error || !course) {
     return (
-      <section className="px-4 py-6 sm:px-6">
+      <section className="px-6 py-8 max-w-7xl mx-auto font-sans">
         <ErrorBanner error={error ?? "Course not found."} />
       </section>
     );
   }
 
   return (
-    <section className="space-y-6 px-4 py-6 sm:px-6">
-      <div className="overflow-hidden rounded-lg border border-line bg-white shadow-sm">
-        {course.thumbnail_url ? (
-          <img alt={course.title} className="h-64 w-full object-cover" src={course.thumbnail_url} />
-        ) : (
-          <div className="flex h-48 items-center justify-center bg-slate-100 text-5xl font-bold text-mint">
-            {course.title.charAt(0).toUpperCase()}
-          </div>
-        )}
-        <div className="space-y-4 p-5">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-coral">
+    <section className="space-y-8 px-6 py-8 sm:px-8 max-w-7xl mx-auto font-sans">
+      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 items-start">
+        {/* Left column: main course details & lessons */}
+        <div className="space-y-8">
+          {/* Main Info Card */}
+          <div className="rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 lg:p-10 shadow-xl shadow-indigo-100/20">
+            <span className="inline-block bg-[#45c3b8]/10 text-[#45c3b8] font-bold px-3 py-1 rounded-full text-xs font-sans tracking-wide">
               {course.category.name}
+            </span>
+            <h2 className="mt-4 text-2xl sm:text-3xl font-extrabold text-[#1e1b4b] font-header leading-tight">
+              {course.title}
+            </h2>
+            <p className="mt-4 text-sm sm:text-base text-slate-500 font-sans leading-relaxed">
+              {course.description}
             </p>
-            <h2 className="mt-2 text-2xl font-bold">{course.title}</h2>
-            <p className="mt-3 text-slate-600">{course.description}</p>
           </div>
-          <div className="flex flex-wrap gap-3 text-sm text-slate-500">
-            <span>Instructor: {course.instructor.full_name}</span>
-            <span>{course.lessons_count} lessons</span>
-            <span>{course.enrollments_count} enrollments</span>
-            <span>Created {formatDate(course.created_at)}</span>
-          </div>
-          {enrollError ? <ErrorBanner error={enrollError} /> : null}
-          {user?.role === "student" && !course.is_enrolled ? (
-            <button
-              className="rounded-md bg-mint px-4 py-2 text-sm font-semibold text-white hover:bg-mint/90 disabled:cursor-not-allowed disabled:opacity-60"
-              disabled={enrolling}
-              onClick={handleEnroll}
-              type="button"
-            >
-              {enrolling ? "Enrolling..." : "Enroll in course"}
-            </button>
-          ) : null}
-          {user?.role === "student" && course.is_enrolled ? (
-            <Link
-              className="inline-flex rounded-md bg-mint px-4 py-2 text-sm font-semibold text-white hover:bg-mint/90"
-              to={`/learn/${course.id}`}
-            >
-              Start learning
-            </Link>
-          ) : null}
-        </div>
-      </div>
 
-      <div className="rounded-lg border border-line bg-white p-5 shadow-sm">
-        <h3 className="text-lg font-semibold">Lessons</h3>
-        {!canAccessLessons ? (
-          <p className="mt-3 text-sm text-slate-600">Enroll in this course to access lessons.</p>
-        ) : lessonsLoading ? (
-          <div className="mt-4">
-            <LoadingBlock />
-          </div>
-        ) : lessons.length ? (
-          <div className="mt-4 divide-y divide-line">
-            {lessons.map((lesson) => (
-              <div className="py-3" key={lesson.id}>
-                <p className="font-semibold">
-                  {lesson.order}. {lesson.title}
-                </p>
-                <p className="mt-1 text-sm text-slate-600">{lesson.content}</p>
+          {/* Lessons Card */}
+          <div className="rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-100/20">
+            <h3 className="text-xl font-extrabold text-[#1e1b4b] font-header border-b border-indigo-50 pb-4 mb-6">Lessons</h3>
+            {!canAccessLessons ? (
+              <div className="rounded-2xl bg-[#f8fafc] p-6 text-center border border-indigo-50/50">
+                <svg className="w-10 h-10 text-indigo-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                <p className="text-sm font-semibold text-[#1e1b4b] font-sans">Enroll in this course to access lessons.</p>
               </div>
-            ))}
+            ) : lessonsLoading ? (
+              <LoadingBlock />
+            ) : lessons.length ? (
+              <div className="space-y-4">
+                {lessons.map((lesson) => (
+                  <div className="flex items-center gap-4 p-3 pr-6 rounded-full border border-indigo-50/50 hover:bg-[#f8fafc]/80 transition-all duration-200" key={lesson.id}>
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-indigo-50 text-[#4f20f0] font-bold text-sm font-header">
+                      {lesson.order}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h4 className="font-bold text-[#1e1b4b] font-sans truncate">{lesson.title}</h4>
+                      <p className="text-xs text-slate-500 font-sans truncate">{lesson.content}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <EmptyState title="No lessons have been added yet." />
+            )}
           </div>
-        ) : (
-          <div className="mt-4">
-            <EmptyState title="No lessons have been added yet." />
+        </div>
+
+        {/* Right column: Sticky checkout & metadata card */}
+        <aside className="rounded-3xl border border-indigo-50/50 bg-white p-6 shadow-xl shadow-indigo-100/20 lg:sticky lg:top-8 flex flex-col gap-6 w-full">
+          {/* Course Thumbnail */}
+          <div className="relative h-48 sm:h-56 lg:h-44 w-full overflow-hidden rounded-2xl shadow-inner bg-slate-100">
+            {course.thumbnail_url ? (
+              <img alt={course.title} className="h-full w-full object-cover" src={course.thumbnail_url} />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#4f20f0] to-[#6d44fc] text-5xl font-extrabold text-white font-header select-none">
+                {course.title.charAt(0).toUpperCase()}
+              </div>
+            )}
           </div>
-        )}
+
+          {/* Enroll / Start learning buttons */}
+          <div className="space-y-3">
+            {enrollError ? <ErrorBanner error={enrollError} /> : null}
+
+            {user?.role === "student" && !course.is_enrolled ? (
+              <button
+                className="w-full rounded-full bg-[#4f20f0] px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#4f20f0]/25 hover:bg-[#3b1cd9] transition-all hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 font-sans"
+                disabled={enrolling}
+                onClick={handleEnroll}
+                type="button"
+              >
+                {enrolling ? "Enrolling..." : "Enroll in course"}
+              </button>
+            ) : null}
+
+            {user?.role === "student" && course.is_enrolled ? (
+              <Link
+                className="w-full text-center inline-block rounded-full bg-[#4f20f0] px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#4f20f0]/25 hover:bg-[#3b1cd9] transition-all hover:scale-[1.02] active:scale-[0.98] font-sans"
+                to={`/learn/${course.id}`}
+              >
+                Start learning
+              </Link>
+            ) : null}
+
+            {user?.role === "instructor" && (
+              <Link
+                className="w-full text-center inline-block rounded-full border border-indigo-100 px-8 py-3.5 text-sm font-bold text-slate-600 hover:bg-indigo-50/50 hover:text-[#4f20f0] hover:border-[#4f20f0] transition-all font-sans"
+                to="/instructor/courses"
+              >
+                Manage courses
+              </Link>
+            )}
+          </div>
+
+          {/* Metadata list */}
+          <div className="space-y-4 border-t border-indigo-50 pt-5">
+            <div className="flex items-center gap-3 text-sm text-slate-600 font-sans">
+              <svg className="w-5 h-5 text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              <span>Instructor: <strong className="text-[#1e1b4b] font-bold">{course.instructor.full_name}</strong></span>
+            </div>
+            <div className="flex items-center gap-3 text-sm text-slate-600 font-sans">
+              <svg className="w-5 h-5 text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              <span>Lessons: <strong className="text-[#1e1b4b] font-bold">{course.lessons_count}</strong></span>
+            </div>
+            <div className="flex items-center gap-3 text-sm text-slate-600 font-sans">
+              <svg className="w-5 h-5 text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <span>Enrollments: <strong className="text-[#1e1b4b] font-bold">{course.enrollments_count}</strong></span>
+            </div>
+            <div className="flex items-center gap-3 text-sm text-slate-600 font-sans">
+              <svg className="w-5 h-5 text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span>Created: <strong className="text-[#1e1b4b] font-bold">{formatDate(course.created_at)}</strong></span>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
   );
@@ -1113,11 +1330,11 @@ function CourseForm({ initialCourse, isSaving, onCancel, onSave }: CourseFormPro
       {serverError ? <ErrorBanner error={serverError} /> : null}
       <div className="grid gap-4 lg:grid-cols-2">
         <div>
-          <label className="text-sm font-medium" htmlFor="course-title">
+          <label className="text-sm font-semibold text-[#3b2c85] mb-1.5 ml-1 block" htmlFor="course-title">
             Title
           </label>
           <input
-            className="mt-1 w-full rounded-md border border-line px-3 py-2 outline-none focus:border-mint focus:ring-2 focus:ring-mint/20"
+            className="w-full rounded-full border border-indigo-200 bg-white py-3 px-6 text-sm outline-none transition-all placeholder:text-slate-400 text-slate-800 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 font-sans"
             id="course-title"
             onChange={(event) => setValues((current) => ({ ...current, title: event.target.value }))}
             value={values.title}
@@ -1125,11 +1342,11 @@ function CourseForm({ initialCourse, isSaving, onCancel, onSave }: CourseFormPro
           <FieldError message={errors.title} />
         </div>
         <div>
-          <label className="text-sm font-medium" htmlFor="course-category">
+          <label className="text-sm font-semibold text-[#3b2c85] mb-1.5 ml-1 block" htmlFor="course-category">
             Category
           </label>
           <input
-            className="mt-1 w-full rounded-md border border-line px-3 py-2 outline-none focus:border-mint focus:ring-2 focus:ring-mint/20"
+            className="w-full rounded-full border border-indigo-200 bg-white py-3 px-6 text-sm outline-none transition-all placeholder:text-slate-400 text-slate-800 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 font-sans"
             id="course-category"
             list="category-options"
             onChange={(event) =>
@@ -1146,11 +1363,11 @@ function CourseForm({ initialCourse, isSaving, onCancel, onSave }: CourseFormPro
         </div>
       </div>
       <div>
-        <label className="text-sm font-medium" htmlFor="course-description">
+        <label className="text-sm font-semibold text-[#3b2c85] mb-1.5 ml-1 block" htmlFor="course-description">
           Description
         </label>
         <textarea
-          className="mt-1 min-h-28 w-full rounded-md border border-line px-3 py-2 outline-none focus:border-mint focus:ring-2 focus:ring-mint/20"
+          className="min-h-28 w-full rounded-2xl border border-indigo-200 bg-white py-3 px-6 text-sm outline-none transition-all placeholder:text-slate-400 text-slate-800 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 font-sans"
           id="course-description"
           onChange={(event) =>
             setValues((current) => ({ ...current, description: event.target.value }))
@@ -1160,12 +1377,12 @@ function CourseForm({ initialCourse, isSaving, onCancel, onSave }: CourseFormPro
         <FieldError message={errors.description} />
       </div>
       <div>
-        <label className="text-sm font-medium" htmlFor="course-thumbnail">
+        <label className="text-sm font-semibold text-[#3b2c85] mb-1.5 ml-1 block" htmlFor="course-thumbnail">
           Thumbnail
         </label>
         <input
           accept="image/*"
-          className="mt-1 w-full rounded-md border border-line px-3 py-2 text-sm"
+          className="mt-1 w-full rounded-full border border-indigo-200 bg-white py-2 px-6 text-sm outline-none file:mr-4 file:py-1.5 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-[#4f20f0] hover:file:bg-indigo-100 cursor-pointer"
           id="course-thumbnail"
           onChange={(event) =>
             setValues((current) => ({
@@ -1176,9 +1393,9 @@ function CourseForm({ initialCourse, isSaving, onCancel, onSave }: CourseFormPro
           type="file"
         />
       </div>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2.5 pt-2">
         <button
-          className="rounded-md bg-mint px-4 py-2 text-sm font-semibold text-white hover:bg-mint/90 disabled:cursor-not-allowed disabled:opacity-60"
+          className="rounded-full bg-[#4f20f0] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-500/10 hover:bg-[#3b1cd9] transition-all hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 font-sans"
           disabled={isSaving}
           type="submit"
         >
@@ -1186,7 +1403,7 @@ function CourseForm({ initialCourse, isSaving, onCancel, onSave }: CourseFormPro
         </button>
         {onCancel ? (
           <button
-            className="rounded-md border border-line px-4 py-2 text-sm font-semibold hover:bg-slate-100"
+            className="rounded-full border border-indigo-100 px-6 py-3 text-sm font-bold text-slate-600 hover:bg-indigo-50/50 hover:text-[#4f20f0] transition-all font-sans"
             onClick={onCancel}
             type="button"
           >
@@ -1230,10 +1447,10 @@ function InstructorCoursesPage() {
   };
 
   return (
-    <section className="space-y-6 px-4 py-6 sm:px-6">
-      <div className="rounded-lg border border-line bg-white p-5 shadow-sm">
-        <h2 className="text-lg font-semibold">{editing ? "Edit Course" : "Create Course"}</h2>
-        <div className="mt-4">
+    <section className="space-y-8 px-6 py-8 sm:px-8 max-w-7xl mx-auto font-sans">
+      <div className="rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-100/20">
+        <h2 className="text-xl font-extrabold text-[#1e1b4b] font-header border-b border-indigo-50 pb-4 mb-6">{editing ? "Edit Course" : "Create Course"}</h2>
+        <div>
           <CourseForm
             initialCourse={editing}
             isSaving={creating || updating}
@@ -1244,9 +1461,9 @@ function InstructorCoursesPage() {
         </div>
       </div>
 
-      <div className="rounded-lg border border-line bg-white p-5 shadow-sm">
-        <h2 className="text-lg font-semibold">My Courses</h2>
-        <div className="mt-4 space-y-3">
+      <div className="rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-100/20">
+        <h2 className="text-xl font-extrabold text-[#1e1b4b] font-header border-b border-indigo-50 pb-4 mb-6">My Courses</h2>
+        <div className="mt-6 space-y-4">
           {error ? <ErrorBanner error={error} /> : null}
           {deleteError ? <ErrorBanner error={deleteError} /> : null}
           {isLoading ? (
@@ -1254,32 +1471,32 @@ function InstructorCoursesPage() {
           ) : courses.length ? (
             courses.map((course) => (
               <div
-                className="flex flex-col gap-3 rounded-md border border-line p-4 lg:flex-row lg:items-center lg:justify-between"
+                className="flex flex-col gap-4 rounded-2xl border border-indigo-50/50 bg-white p-5 shadow-sm shadow-indigo-100/10 lg:flex-row lg:items-center lg:justify-between transition-all duration-300 hover:shadow-md hover:translate-y-[-1px]"
                 key={course.id}
               >
                 <div>
-                  <p className="font-semibold">{course.title}</p>
-                  <p className="mt-1 text-sm text-slate-500">
-                    {course.category.name} - {course.lessons_count} lessons -{" "}
+                  <p className="font-semibold text-slate-800 font-sans text-base">{course.title}</p>
+                  <p className="mt-1 text-sm text-slate-500 font-sans">
+                    {course.category.name} • {course.lessons_count} lessons •{" "}
                     {course.enrollments_count} enrollments
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2.5">
                   <Link
-                    className="rounded-md border border-line px-3 py-2 text-sm font-semibold hover:bg-slate-100"
+                    className="rounded-full border border-indigo-100 px-5 py-2.5 text-xs font-bold text-slate-600 hover:bg-indigo-50/50 hover:text-[#4f20f0] hover:border-[#4f20f0] transition-all font-sans text-center"
                     to={`/courses/${course.id}`}
                   >
                     View
                   </Link>
                   <button
-                    className="rounded-md border border-line px-3 py-2 text-sm font-semibold hover:bg-slate-100"
+                    className="rounded-full border border-indigo-100 px-5 py-2.5 text-xs font-bold text-slate-600 hover:bg-indigo-50/50 hover:text-[#4f20f0] hover:border-[#4f20f0] transition-all font-sans text-center"
                     onClick={() => setEditing(course)}
                     type="button"
                   >
                     Edit
                   </button>
                   <button
-                    className="rounded-md bg-coral px-3 py-2 text-sm font-semibold text-white hover:bg-coral/90"
+                    className="rounded-full bg-coral px-5 py-2.5 text-xs font-bold text-white shadow-md shadow-[#45c3b8]/10 hover:bg-[#3ba89f] transition-all hover:scale-[1.02] active:scale-[0.98] text-center font-sans"
                     onClick={() => void handleDelete(course)}
                     type="button"
                   >
@@ -1361,11 +1578,11 @@ function LessonForm({ courseId, initialLesson, isSaving, onCancel, onSave }: Les
       {serverError ? <ErrorBanner error={serverError} /> : null}
       <div className="grid gap-4 lg:grid-cols-[1fr_140px]">
         <div>
-          <label className="text-sm font-medium" htmlFor="lesson-title">
+          <label className="text-sm font-semibold text-[#3b2c85] mb-1.5 ml-1 block" htmlFor="lesson-title">
             Title
           </label>
           <input
-            className="mt-1 w-full rounded-md border border-line px-3 py-2 outline-none focus:border-mint focus:ring-2 focus:ring-mint/20"
+            className="w-full rounded-full border border-indigo-200 bg-white py-3 px-6 text-sm outline-none transition-all placeholder:text-slate-400 text-slate-800 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 font-sans"
             id="lesson-title"
             onChange={(event) => setValues((current) => ({ ...current, title: event.target.value }))}
             value={values.title}
@@ -1373,11 +1590,11 @@ function LessonForm({ courseId, initialLesson, isSaving, onCancel, onSave }: Les
           <FieldError message={errors.title} />
         </div>
         <div>
-          <label className="text-sm font-medium" htmlFor="lesson-order">
+          <label className="text-sm font-semibold text-[#3b2c85] mb-1.5 ml-1 block" htmlFor="lesson-order">
             Order
           </label>
           <input
-            className="mt-1 w-full rounded-md border border-line px-3 py-2 outline-none focus:border-mint focus:ring-2 focus:ring-mint/20"
+            className="w-full rounded-full border border-indigo-200 bg-white py-3 px-6 text-sm outline-none transition-all placeholder:text-slate-400 text-slate-800 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 font-sans"
             id="lesson-order"
             min="1"
             onChange={(event) => setValues((current) => ({ ...current, order: event.target.value }))}
@@ -1388,11 +1605,11 @@ function LessonForm({ courseId, initialLesson, isSaving, onCancel, onSave }: Les
         </div>
       </div>
       <div>
-        <label className="text-sm font-medium" htmlFor="lesson-video">
+        <label className="text-sm font-semibold text-[#3b2c85] mb-1.5 ml-1 block" htmlFor="lesson-video">
           Video URL
         </label>
         <input
-          className="mt-1 w-full rounded-md border border-line px-3 py-2 outline-none focus:border-mint focus:ring-2 focus:ring-mint/20"
+          className="w-full rounded-full border border-indigo-200 bg-white py-3 px-6 text-sm outline-none transition-all placeholder:text-slate-400 text-slate-800 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 font-sans"
           id="lesson-video"
           onChange={(event) =>
             setValues((current) => ({ ...current, video_url: event.target.value }))
@@ -1402,11 +1619,11 @@ function LessonForm({ courseId, initialLesson, isSaving, onCancel, onSave }: Les
         <FieldError message={errors.video_url} />
       </div>
       <div>
-        <label className="text-sm font-medium" htmlFor="lesson-content">
+        <label className="text-sm font-semibold text-[#3b2c85] mb-1.5 ml-1 block" htmlFor="lesson-content">
           Content
         </label>
         <textarea
-          className="mt-1 min-h-28 w-full rounded-md border border-line px-3 py-2 outline-none focus:border-mint focus:ring-2 focus:ring-mint/20"
+          className="min-h-28 w-full rounded-2xl border border-indigo-200 bg-white py-3 px-6 text-sm outline-none transition-all placeholder:text-slate-400 text-slate-800 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 font-sans"
           id="lesson-content"
           onChange={(event) =>
             setValues((current) => ({ ...current, content: event.target.value }))
@@ -1415,9 +1632,9 @@ function LessonForm({ courseId, initialLesson, isSaving, onCancel, onSave }: Les
         />
         <FieldError message={errors.content} />
       </div>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2.5 pt-2">
         <button
-          className="rounded-md bg-mint px-4 py-2 text-sm font-semibold text-white hover:bg-mint/90 disabled:cursor-not-allowed disabled:opacity-60"
+          className="rounded-full bg-[#4f20f0] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-500/10 hover:bg-[#3b1cd9] transition-all hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 font-sans"
           disabled={isSaving}
           type="submit"
         >
@@ -1425,7 +1642,7 @@ function LessonForm({ courseId, initialLesson, isSaving, onCancel, onSave }: Les
         </button>
         {onCancel ? (
           <button
-            className="rounded-md border border-line px-4 py-2 text-sm font-semibold hover:bg-slate-100"
+            className="rounded-full border border-indigo-100 px-6 py-3 text-sm font-bold text-slate-600 hover:bg-indigo-50/50 hover:text-[#4f20f0] transition-all font-sans"
             onClick={onCancel}
             type="button"
           >
@@ -1485,12 +1702,12 @@ function InstructorLessonsPage() {
   };
 
   return (
-    <section className="space-y-6 px-4 py-6 sm:px-6">
-      <div className="rounded-lg border border-line bg-white p-5 shadow-sm">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <h2 className="text-lg font-semibold">Manage Lessons</h2>
+    <section className="space-y-8 px-6 py-8 sm:px-8 max-w-7xl mx-auto font-sans">
+      <div className="rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-100/20">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border-b border-indigo-50 pb-4 mb-6">
+          <h2 className="text-xl font-extrabold text-[#1e1b4b] font-header">Manage Lessons</h2>
           <select
-            className="rounded-md border border-line px-3 py-2 outline-none focus:border-mint focus:ring-2 focus:ring-mint/20"
+            className="rounded-full border border-indigo-200 bg-white py-2.5 px-5 text-sm font-semibold text-slate-700 outline-none focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 transition-all font-sans cursor-pointer"
             disabled={!courses.length}
             onChange={(event) => {
               setSelectedCourseId(Number(event.target.value));
@@ -1506,7 +1723,7 @@ function InstructorLessonsPage() {
           </select>
         </div>
 
-        <div className="mt-5">
+        <div>
           {coursesLoading ? (
             <LoadingBlock />
           ) : selectedCourseId ? (
@@ -1520,7 +1737,7 @@ function InstructorLessonsPage() {
             />
           ) : (
             <EmptyState title="Create a course before adding lessons.">
-              <Link className="font-semibold text-mint hover:underline" to="/instructor/courses">
+              <Link className="font-semibold text-[#4f20f0] hover:underline" to="/instructor/courses">
                 Go to course management
               </Link>
             </EmptyState>
@@ -1528,9 +1745,9 @@ function InstructorLessonsPage() {
         </div>
       </div>
 
-      <div className="rounded-lg border border-line bg-white p-5 shadow-sm">
-        <h2 className="text-lg font-semibold">Lessons</h2>
-        <div className="mt-4 space-y-3">
+      <div className="rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-100/20">
+        <h2 className="text-xl font-extrabold text-[#1e1b4b] font-header border-b border-indigo-50 pb-4 mb-6">Lessons</h2>
+        <div className="mt-6 space-y-4">
           {error ? <ErrorBanner error={error} /> : null}
           {deleteError ? <ErrorBanner error={deleteError} /> : null}
           {isLoading ? (
@@ -1538,25 +1755,25 @@ function InstructorLessonsPage() {
           ) : lessons.length ? (
             lessons.map((lesson) => (
               <div
-                className="flex flex-col gap-3 rounded-md border border-line p-4 lg:flex-row lg:items-center lg:justify-between"
+                className="flex flex-col gap-4 rounded-2xl border border-indigo-50/50 bg-white p-5 shadow-sm shadow-indigo-100/10 lg:flex-row lg:items-center lg:justify-between transition-all duration-300 hover:shadow-md hover:translate-y-[-1px]"
                 key={lesson.id}
               >
                 <div>
-                  <p className="font-semibold">
+                  <p className="font-semibold text-slate-800 font-sans text-base">
                     {lesson.order}. {lesson.title}
                   </p>
-                  <p className="mt-1 text-sm text-slate-500">{lesson.course_title}</p>
+                  <p className="mt-1 text-sm text-slate-500 font-sans">{lesson.course_title}</p>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2.5">
                   <button
-                    className="rounded-md border border-line px-3 py-2 text-sm font-semibold hover:bg-slate-100"
+                    className="rounded-full border border-indigo-100 px-5 py-2.5 text-xs font-bold text-slate-600 hover:bg-indigo-50/50 hover:text-[#4f20f0] hover:border-[#4f20f0] transition-all font-sans text-center"
                     onClick={() => setEditing(lesson)}
                     type="button"
                   >
                     Edit
                   </button>
                   <button
-                    className="rounded-md bg-coral px-3 py-2 text-sm font-semibold text-white hover:bg-coral/90"
+                    className="rounded-full bg-coral px-5 py-2.5 text-xs font-bold text-white shadow-md shadow-[#45c3b8]/10 hover:bg-[#3ba89f] transition-all hover:scale-[1.02] active:scale-[0.98] text-center font-sans"
                     onClick={() => void handleDelete(lesson)}
                     type="button"
                   >
@@ -1578,19 +1795,26 @@ function MyCoursesPage() {
   const { data: courses = [], error, isLoading } = useGetMyCoursesQuery();
 
   return (
-    <section className="space-y-5 px-4 py-6 sm:px-6">
+    <section className="space-y-8 px-6 py-8 sm:px-8 max-w-7xl mx-auto font-sans">
+      <div className="border-b border-indigo-50 pb-5">
+        <h2 className="text-2xl font-extrabold text-[#1e1b4b] font-header">My Enrolled Courses</h2>
+        <p className="mt-1 text-sm text-slate-500 font-sans">
+          {isLoading ? "Loading your courses..." : `You are enrolled in ${courses.length} courses`}
+        </p>
+      </div>
+
       {error ? <ErrorBanner error={error} /> : null}
       {isLoading ? (
         <LoadingBlock />
       ) : courses.length ? (
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {courses.map((course) => (
             <CourseCard course={course} key={course.id} />
           ))}
         </div>
       ) : (
         <EmptyState title="No enrolled courses yet.">
-          <Link className="font-semibold text-mint hover:underline" to="/courses">
+          <Link className="font-bold text-[#4f20f0] hover:underline hover:text-[#3b1cd9]" to="/courses">
             Browse courses
           </Link>
         </EmptyState>
@@ -1626,7 +1850,7 @@ function LearningPage() {
 
   if (courseLoading) {
     return (
-      <section className="px-4 py-6 sm:px-6">
+      <section className="px-6 py-8 max-w-7xl mx-auto font-sans">
         <LoadingBlock />
       </section>
     );
@@ -1634,7 +1858,7 @@ function LearningPage() {
 
   if (courseError || !course) {
     return (
-      <section className="px-4 py-6 sm:px-6">
+      <section className="px-6 py-8 max-w-7xl mx-auto font-sans">
         <ErrorBanner error={courseError ?? "Course not found."} />
       </section>
     );
@@ -1642,9 +1866,9 @@ function LearningPage() {
 
   if (!canAccess) {
     return (
-      <section className="px-4 py-6 sm:px-6">
+      <section className="px-6 py-8 max-w-7xl mx-auto font-sans">
         <EmptyState title="You are not enrolled in this course.">
-          <Link className="font-semibold text-mint hover:underline" to={`/courses/${course.id}`}>
+          <Link className="font-bold text-[#4f20f0] hover:underline" to={`/courses/${course.id}`}>
             View course
           </Link>
         </EmptyState>
@@ -1652,11 +1876,14 @@ function LearningPage() {
     );
   }
 
+  const embedUrl = activeLesson?.video_url ? getYoutubeEmbedUrl(activeLesson.video_url) : "";
+
   return (
-    <section className="grid gap-6 px-4 py-6 sm:px-6 xl:grid-cols-[320px_1fr]">
-      <aside className="rounded-lg border border-line bg-white p-4 shadow-sm">
-        <h2 className="text-lg font-semibold">{course.title}</h2>
-        <div className="mt-4 space-y-2">
+    <section className="grid gap-6 px-6 py-8 sm:px-8 max-w-7xl mx-auto font-sans grid-cols-1 lg:grid-cols-[300px_1fr]">
+      {/* Sidebar navigator */}
+      <aside className="rounded-3xl border border-indigo-50/50 bg-white p-5 shadow-xl shadow-indigo-100/20 self-start w-full">
+        <h2 className="text-lg font-extrabold text-[#1e1b4b] font-header border-b border-indigo-50 pb-3 mb-4 truncate">{course.title}</h2>
+        <div className="space-y-2 max-h-[500px] overflow-y-auto pr-1">
           {lessonsError ? <ErrorBanner error={lessonsError} /> : null}
           {lessonsLoading ? (
             <LoadingBlock />
@@ -1664,10 +1891,10 @@ function LearningPage() {
             lessons.map((lesson) => (
               <button
                 className={[
-                  "w-full rounded-md px-3 py-2 text-left text-sm font-medium",
+                  "w-full rounded-full px-5 py-3 text-left text-sm font-bold transition-all duration-200 font-sans",
                   activeLesson?.id === lesson.id
-                    ? "bg-mint text-white"
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200",
+                    ? "bg-[#4f20f0] text-white shadow-md shadow-indigo-500/10"
+                    : "bg-[#f8fafc] text-slate-700 hover:bg-indigo-50/50 hover:text-[#4f20f0]",
                 ].join(" ")}
                 key={lesson.id}
                 onClick={() => setActiveLessonId(lesson.id)}
@@ -1682,24 +1909,43 @@ function LearningPage() {
         </div>
       </aside>
 
-      <article className="rounded-lg border border-line bg-white p-5 shadow-sm">
+      {/* Main Content Player */}
+      <article className="rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-100/20 flex flex-col justify-between h-full">
         {activeLesson ? (
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-coral">
+            <span className="inline-block bg-[#45c3b8]/10 text-[#45c3b8] font-bold px-3 py-1 rounded-full text-xs font-sans tracking-wide">
               Lesson {activeLesson.order}
-            </p>
-            <h2 className="mt-2 text-2xl font-bold">{activeLesson.title}</h2>
+            </span>
+            <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#1e1b4b] font-header leading-tight">{activeLesson.title}</h2>
+            
             {activeLesson.video_url ? (
-              <a
-                className="mt-4 inline-flex rounded-md border border-line px-4 py-2 text-sm font-semibold hover:bg-slate-100"
-                href={activeLesson.video_url}
-                rel="noreferrer"
-                target="_blank"
-              >
-                Open video
-              </a>
+              <div className="mt-6">
+                {embedUrl ? (
+                  <div className="aspect-video w-full overflow-hidden rounded-2xl border border-indigo-50 shadow-inner bg-slate-100 mb-6">
+                    <iframe
+                      title={activeLesson.title}
+                      src={embedUrl}
+                      className="w-full h-full border-0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                ) : (
+                  <a
+                    className="inline-flex rounded-full border border-indigo-100 bg-white px-6 py-2.5 text-sm font-bold text-[#4f20f0] hover:bg-[#4f20f0] hover:text-white hover:border-[#4f20f0] shadow-sm hover:shadow-md transition-all font-sans items-center gap-2 mb-6"
+                    href={activeLesson.video_url}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <span>Open Video Resource</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 00-2 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                )}
+              </div>
             ) : null}
-            <p className="mt-5 whitespace-pre-line leading-7 text-slate-700">{activeLesson.content}</p>
+            <p className="mt-5 whitespace-pre-line leading-relaxed text-slate-600 font-sans text-sm sm:text-base">{activeLesson.content}</p>
           </div>
         ) : (
           <EmptyState title="Select a lesson to begin." />
@@ -1746,10 +1992,10 @@ function ProfilePage() {
   };
 
   return (
-    <section className="px-4 py-6 sm:px-6">
-      <div className="max-w-2xl rounded-lg border border-line bg-white p-5 shadow-sm">
-        <h2 className="text-lg font-semibold">Profile</h2>
-        <div className="mt-4 space-y-4">
+    <section className="space-y-8 px-6 py-8 sm:px-8 max-w-7xl mx-auto font-sans">
+      <div className="max-w-2xl rounded-3xl border border-indigo-50/50 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-100/20">
+        <h2 className="text-xl font-extrabold text-[#1e1b4b] font-header border-b border-indigo-50 pb-4 mb-6">Profile</h2>
+        <div className="space-y-4">
           {isLoading ? <LoadingBlock /> : null}
           {error ? <ErrorBanner error={error} /> : null}
           {serverError ? <ErrorBanner error={serverError} /> : null}
@@ -1761,29 +2007,29 @@ function ProfilePage() {
           {profile ? (
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
-                <label className="text-sm font-medium" htmlFor="profile-name">
+                <label className="text-sm font-semibold text-[#3b2c85] mb-1.5 ml-1 block" htmlFor="profile-name">
                   Full Name
                 </label>
                 <input
-                  className="mt-1 w-full rounded-md border border-line px-3 py-2 outline-none focus:border-mint focus:ring-2 focus:ring-mint/20"
+                  className="w-full rounded-full border border-indigo-200 bg-white py-3.5 px-6 text-sm outline-none transition-all placeholder:text-slate-400 text-slate-800 focus:border-[#4f20f0] focus:ring-2 focus:ring-indigo-100 font-sans"
                   id="profile-name"
                   onChange={(event) => setFullName(event.target.value)}
                   value={fullName}
                 />
                 <FieldError message={fieldErrors.full_name} />
               </div>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2 py-2">
                 <div>
-                  <p className="text-sm text-slate-500">Email</p>
-                  <p className="mt-1 font-medium">{profile.email}</p>
+                  <p className="text-sm text-slate-500 font-semibold mb-1 ml-1">Email</p>
+                  <p className="font-semibold text-[#1e1b4b] bg-[#f8fafc] rounded-full px-6 py-3 border border-indigo-50/50 text-sm select-all">{profile.email}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-slate-500">Role</p>
-                  <p className="mt-1 font-medium">{roleLabel(profile.role)}</p>
+                  <p className="text-sm text-slate-500 font-semibold mb-1 ml-1">Role</p>
+                  <p className="font-semibold text-[#1e1b4b] bg-[#f8fafc] rounded-full px-6 py-3 border border-indigo-50/50 text-sm">{roleLabel(profile.role)}</p>
                 </div>
               </div>
               <button
-                className="rounded-md bg-mint px-4 py-2 text-sm font-semibold text-white hover:bg-mint/90 disabled:cursor-not-allowed disabled:opacity-60"
+                className="rounded-full bg-[#4f20f0] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-500/20 hover:bg-[#3b1cd9] transition-all hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 font-sans"
                 disabled={updating}
                 type="submit"
               >
