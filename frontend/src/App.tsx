@@ -892,6 +892,7 @@ function AppLayout() {
       navigate("/login", { replace: true });
     }
   };
+ 
 
   return (
     <div className="min-h-screen bg-[#f8fafc] dark:bg-slate-950 text-ink dark:text-slate-100 font-sans transition-colors duration-300">
