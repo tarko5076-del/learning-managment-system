@@ -15,17 +15,15 @@ As a developer and designer, special attention was paid to the visual aesthetics
 *   **Responsive Fluid Layouts**: Fully responsive dashboard featuring a collapsible sidebar that turns into a mobile-friendly swipeable bottom-navigation drawer.
 *   **Micro-interactions**: Subtle hover scaling, shadow transitions on cards, and clean loading skeletons for async states.
 
-### 📸 Screenshots & Prototypes
-> [!TIP]
-> You can replace these placeholder paths with actual screenshots of the application to show off your UI/UX designs on GitHub!
+### 📸 Screenshots
 
-| Login Screen (Dark Mode) | Student Dashboard (Light Mode) |
+| Login Screen (Desktop) | Login Screen (Mobile) |
 |:---:|:---:|
-| ![Login Screen for desktop](screenshots/login.png) | ![login screen mobile](screenshots/dashboard_light.png) |
+| ![Login Desktop](screenshots/login.png) | ![Login Mobile](screenshots/loginMobile.png) |
 
-| Course Learning Interface | Instructor Panel |
+| Register Screen (Desktop) | Register Screen (Mobile) |
 |:---:|:---:|
-| ![Course Page](screenshots/course_learning.png) | ![Manage Courses](screenshots/instructor_panel.png) |
+| ![Register Desktop](screenshots/register.png) | ![Register Mobile](screenshots/registerMobile.png) |
 
 ---
 
@@ -76,7 +74,7 @@ docker compose exec backend python manage.py test
 *   **Backend**: Python, Django, Django REST Framework, SimpleJWT (JSON Web Token authentication).
 *   **Database**: PostgreSQL.
 *   **DevOps**: Docker, Docker Compose.
-*   figma    : for desgin
+*   **Design**: Figma.
 
 ---
 
