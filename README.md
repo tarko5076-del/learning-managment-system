@@ -19,11 +19,11 @@ As a developer and designer, special attention was paid to the visual aesthetics
 
 | Login Screen (Desktop) | Login Screen (Mobile) |
 |:---:|:---:|
-| ![Login Desktop](screenshots/login.png) | ![Login Mobile](screenshots/loginMobile.png) |
+| ![Login Desktop](figma/login.png) | ![Login Mobile](figma/loginMobile.png) |
 
 | Register Screen (Desktop) | Register Screen (Mobile) |
 |:---:|:---:|
-| ![Register Desktop](screenshots/register.png) | ![Register Mobile](screenshots/registerMobile.png) |
+| ![Register Desktop](figma/register.png) | ![Register Mobile](figma/registerMobile.png) |
 
 ---
 
