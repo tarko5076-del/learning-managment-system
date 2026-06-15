@@ -2,10 +2,7 @@
 
 A modern, containerized, full-stack Learning Management System developed with **React (TypeScript)** on the frontend and **Django REST Framework** on the backend, backed by **PostgreSQL** and orchestrated with **Docker Compose**.
 
-This application is built for Brothers IT PLC as a Technical Internship Assessment.
-
----
-
+The application is built for understanding docker and use python as a backend after i learn how to use django in one weeks still in the path of learning django.
 ## 🎨 Design System & UI Showcase
 
 As a developer and designer, special attention was paid to the visual aesthetics, user experience, and interactive details of this application:
