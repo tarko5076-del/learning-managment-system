@@ -15,7 +15,7 @@ As a developer and designer, special attention was paid to the visual aesthetics
 *   **Responsive Fluid Layouts**: Fully responsive dashboard featuring a collapsible sidebar that turns into a mobile-friendly swipeable bottom-navigation drawer.
 *   **Micro-interactions**: Subtle hover scaling, shadow transitions on cards, and clean loading skeletons for async states.
 
-### 📸 Screenshots
+### 📸 figma design sample
 
 | Login Screen (Desktop) | Login Screen (Mobile) |
 |:---:|:---:|
